@@ -6,8 +6,8 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
-  console.log(search)
-  console.log(StoryArr.stories)
+  // console.log(search)
+  // console.log(StoryArr.stories)
 
   const fetchStories = async () => {
     setStories(StoryArr.stories)
