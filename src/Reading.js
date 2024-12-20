@@ -45,7 +45,7 @@ const Reading = () => {
             {finalStory.join(' ')}
           </p>
           <button onClick={() => navigate('/Playing', { state: { story: story } })} >Play again</button>
-          <button onClick={() => navigate('/*')}>Back to Stories</button>
+          <button onClick={() => navigate('/')}>Back to Stories</button>
         </div>
       )
       }
