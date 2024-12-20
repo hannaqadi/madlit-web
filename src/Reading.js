@@ -9,28 +9,25 @@ const Reading = () => {
   const [finalStory, setFinalStory] = useState([])
 
   const combineText = () => {
-    let tempStory = [...(story.storySeq || [])];
+    let tempStory = [...story.storySeq];
     let j = 0;
-
-    if (j !== finalInputs.length) {
       for (let i = 0; tempStory.length > i; i++) {
-        if (tempStory[i] === "") {
+        if (tempStory[i] === "" && j < finalInputs.length) {
           tempStory[i] = finalInputs[j]
           j++
         }
       }
-    }
-
     if (j === finalInputs.length) {
       setFinalStory(tempStory)
       setIsLoaded(true)
     }
   }
+
   useEffect(() => {
     setIsLoaded(false)
     setFinalStory([])
     combineText()
-  }, [])
+  }, [finalInputs, story])
 
   return (
     <div>
