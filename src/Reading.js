@@ -8,40 +8,75 @@ const Reading = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [finalStory, setFinalStory] = useState([])
 
-  const combineText = () => {
-    let tempStory = [...story.storySeq];
-    let j = 0;
-      for (let i = 0; tempStory.length > i; i++) {
-        if (tempStory[i] === "" && j < finalInputs.length) {
-          tempStory[i] = finalInputs[j]
-          j++
-        }
-      }
-    if (j === finalInputs.length) {
-      setFinalStory(tempStory)
-      setIsLoaded(true)
-    }
-  }
+  useEffect(() => {
+    window.history.pushState(null, '', window.location.href);
+
+    const handlePopState = (event) => {
+      window.history.pushState(null, '', window.location.href);
+      navigate('/');
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, [navigate]);
+
 
   useEffect(() => {
-    setIsLoaded(false)
-    setFinalStory([])
-    combineText()
+    const combineText = () => {
+      if (story && Array.isArray(story.storySeq)) {
+        let tempStory = [...story.storySeq];
+        let j = 0;
+        for (let i = 0; i < tempStory.length; i++) {
+          if (tempStory[i] === "" && j < finalInputs.length) {
+            tempStory[i] = finalInputs[j];
+            j++;
+          }
+        }
+        if (j === finalInputs.length) {
+          setFinalStory(tempStory);
+          localStorage.setItem('finalStory', JSON.stringify(tempStory));
+          console.log(localStorage.getItem('finalStory'))
+          setIsLoaded(true);
+        }
+      } else {
+        console.error("There was an error");
+      }
+    };
+
+    if (story && story.storySeq) {
+      setIsLoaded(false);
+      setFinalStory([]);
+      combineText();
+    } else {
+      console.error("story data is missing, can't combine text.");
+    }
   }, [finalInputs, story])
+
+  const handlePlayAgain = () => {
+    localStorage.removeItem('finalStory')
+    navigate('/Playing', { state: { story: story } })
+  }
 
   return (
     <div>
       <p>Reading</p>
-      {!isLoaded ? (
+      {console.log(!!!localStorage.getItem('finalStory'), 'local')}
+      {console.log(!isLoaded, 'loadies')}
+      {!isLoaded && !!!localStorage.getItem('finalStory') ? (
         <div>
           <p>Loading...</p>
         </div>
       ) : (
         <div>
           <p>
-            {finalStory.join(' ')}
+          {(finalStory.length > 0 
+        ? finalStory 
+        : JSON.parse(localStorage.getItem('finalStory')) || [])
+        .join(' ')}
           </p>
-          <button onClick={() => navigate('/Playing', { state: { story: story } })} >Play again</button>
+          <button onClick={() => handlePlayAgain} >Play again</button>
           <button onClick={() => navigate('/')}>Back to Stories</button>
         </div>
       )
