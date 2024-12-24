@@ -6,8 +6,6 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
-  // console.log(search)
-  // console.log(StoryArr.stories)
 
   const fetchStories = async () => {
     setStories(StoryArr.stories)
@@ -31,6 +29,13 @@ const Homepage = () => {
   }
 
   const handleStorySelect = (story) => {
+    if(!!localStorage.getItem('story')){
+      localStorage.removeItem('story')
+    }
+    if(!!localStorage.getItem('finalStory')){
+      localStorage.removeItem('finalStory')
+    }
+    localStorage.setItem('story', JSON.stringify(story))
     navigate('/Playing',{
       state:{
         story: story

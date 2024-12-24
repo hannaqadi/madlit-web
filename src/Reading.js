@@ -4,7 +4,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 const Reading = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { finalInputs = [], story = {} } = location.state || {};
+  const story = JSON.parse(localStorage.getItem('story'))
+  const { finalInputs = [] } = location.state || {};
   const [isLoaded, setIsLoaded] = useState(false)
   const [finalStory, setFinalStory] = useState([])
 
@@ -45,14 +46,14 @@ const Reading = () => {
       }
     };
 
-    if (story && story.storySeq) {
+    if (!isLoaded && finalStory.length === 0 && !!!localStorage.getItem('finalStory')) {
       setIsLoaded(false);
       setFinalStory([]);
       combineText();
     } else {
       console.error("story data is missing, can't combine text.");
     }
-  }, [finalInputs, story])
+  }, [finalInputs, story, finalStory.length, isLoaded])
 
   const handlePlayAgain = () => {
     localStorage.removeItem('finalStory')
@@ -62,8 +63,6 @@ const Reading = () => {
   return (
     <div>
       <p>Reading</p>
-      {console.log(!!!localStorage.getItem('finalStory'), 'local')}
-      {console.log(!isLoaded, 'loadies')}
       {!isLoaded && !!!localStorage.getItem('finalStory') ? (
         <div>
           <p>Loading...</p>
@@ -76,7 +75,7 @@ const Reading = () => {
         : JSON.parse(localStorage.getItem('finalStory')) || [])
         .join(' ')}
           </p>
-          <button onClick={() => handlePlayAgain} >Play again</button>
+          <button onClick={handlePlayAgain} >Play again</button>
           <button onClick={() => navigate('/')}>Back to Stories</button>
         </div>
       )

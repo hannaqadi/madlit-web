@@ -5,11 +5,13 @@ import { useBlocker } from 'react-router-dom'
 const Playing = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const { story } = location.state || {};
+  const story = localStorage.getItem('story')
+  // const { story } = location.state || {};
   const [inputs, setInputs] = useState({});
   const isSubmittingRef = useRef(false); 
   const isDirtyRef = useRef(false)
 
+  console.log(story)
   const handleChange = (index, event) => {
     const { value } = event.target
     setInputs((prevInputs) => ({
@@ -62,7 +64,7 @@ const Playing = () => {
       <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
       <div>
         <form onSubmit={handleSubmit}>
-          {story.partOfSpeech.map((part, index) => (
+          {JSON.parse(story).partOfSpeech.map((part, index) => (
             <div key={index}>
               <p>{part}</p>
               <input
