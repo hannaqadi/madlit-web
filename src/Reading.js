@@ -38,11 +38,8 @@ const Reading = () => {
         if (j === finalInputs.length) {
           setFinalStory(tempStory);
           localStorage.setItem('finalStory', JSON.stringify(tempStory));
-          console.log(localStorage.getItem('finalStory'))
           setIsLoaded(true);
         }
-      } else {
-        console.error("There was an error");
       }
     };
 
@@ -50,8 +47,6 @@ const Reading = () => {
       setIsLoaded(false);
       setFinalStory([]);
       combineText();
-    } else {
-      console.error("story data is missing, can't combine text.");
     }
   }, [finalInputs, story, finalStory.length, isLoaded])
 

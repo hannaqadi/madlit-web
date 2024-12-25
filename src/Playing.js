@@ -1,17 +1,14 @@
 import { useState, useEffect, useRef } from "react";
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { useBlocker } from 'react-router-dom'
 
 const Playing = () => {
   const navigate = useNavigate();
-  const location = useLocation();
   const story = localStorage.getItem('story')
-  // const { story } = location.state || {};
   const [inputs, setInputs] = useState({});
   const isSubmittingRef = useRef(false); 
   const isDirtyRef = useRef(false)
 
-  console.log(story)
   const handleChange = (index, event) => {
     const { value } = event.target
     setInputs((prevInputs) => ({
@@ -45,8 +42,7 @@ const Playing = () => {
 
     navigate('/Reading', {
       state: {
-        finalInputs: finalInputs,
-        story: story
+        finalInputs: finalInputs
       }
     })
   }

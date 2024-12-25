@@ -36,11 +36,7 @@ const Homepage = () => {
       localStorage.removeItem('finalStory')
     }
     localStorage.setItem('story', JSON.stringify(story))
-    navigate('/Playing',{
-      state:{
-        story: story
-      }
-    })
+    navigate('/Playing')
   }
   return (
     <div>
