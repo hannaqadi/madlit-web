@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { StoryArr } from "./StoryArr";
 
@@ -6,21 +6,47 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+  const loader = useRef(null);
 
   const fetchStories = async () => {
-    setStories(StoryArr.stories)
+    // const response = await fetch(`/api/stories?page=${page}&limit=10`);
+    // const data = await response.json();
+    const newStories = StoryArr.stories.filter(
+      (story) => !stories.some((existingStory) => existingStory.id === story.id)
+  );
+    setStories(prev => [...prev, ...newStories])
+    setHasMore(StoryArr.currentPage < StoryArr.totalPages);
     console.log('fetching stories!')
   }
 
   useEffect(() => {
-    fetchStories()
-
-  }, [])
+    fetchStories();
+  }, [page])
 
 
   const handleInputChange = (e) => {
     setSearch(e.target.value)
   }
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(entries => {
+      if (entries[0].isIntersecting && hasMore) {
+        setPage(prev => prev + 1);
+      }
+    });
+
+    if (loader.current) {
+      observer.observe(loader.current);
+    }
+
+    return () => {
+      if (loader.current) {
+        observer.unobserve(loader.current);
+      }
+    };
+  }, [loader, hasMore]);
 
   const handleSubmitSearch = (e) => {
     e.preventDefault()
@@ -29,15 +55,16 @@ const Homepage = () => {
   }
 
   const handleStorySelect = (story) => {
-    if(!!localStorage.getItem('story')){
+    if (!!localStorage.getItem('story')) {
       localStorage.removeItem('story')
     }
-    if(!!localStorage.getItem('finalStory')){
+    if (!!localStorage.getItem('finalStory')) {
       localStorage.removeItem('finalStory')
     }
     localStorage.setItem('story', JSON.stringify(story))
     navigate('/Playing')
   }
+
   return (
     <div>
       <p>Homepage</p>
@@ -69,8 +96,8 @@ const Homepage = () => {
         ) : (
           <p>Whoops! There's nothing here </p>
         )
-
         }
+        {hasMore && <div ref={loader}>Loading more stories...</div>}
       </div>
     </div>
   )
