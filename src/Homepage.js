@@ -10,25 +10,21 @@ const Homepage = () => {
   const [hasMore, setHasMore] = useState(true);
   const loader = useRef(null);
 
+
   const fetchStories = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/stories');
+      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=10`);
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
       const data = await response.json();
       console.log(data)
-      const newStories = data.filter(
-        (story) => !data.some((existingStory) => existingStory.id === story.id)
-      );
-      setStories(prev => [...prev, ...newStories])
-      // setHasMore(StoryArr.currentPage < StoryArr.totalPages);
-      console.log('fetching stories!')
+      setStories(prev => [...prev, ...data.stories]); // Append new stories
+      setHasMore(page < data.totalPages); // Check if there are more pages
     } catch (err) {
       console.log(err.message);
     }
-
-  }
+  };
 
   useEffect(() => {
     fetchStories();
