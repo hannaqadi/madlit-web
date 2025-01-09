@@ -16,11 +16,14 @@ const Homepage = () => {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3`);
+      console.log('starting fetch')
+      console.log('page in fetch', page)
+      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}`);
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
       const data = await response.json();
+      console.log('data', data)
       setStories(prev => [...prev, ...data.stories]); 
       setHasMore(page < data.totalPages); // Check if there are more pages
     } catch (err) {
@@ -47,6 +50,7 @@ const Homepage = () => {
         }
       },
       {
+        //TODO: Allow loading to show slightly before triggering observer
         root: null, 
         rootMargin: "200px", // Trigger when the element is within 200px of the viewport
         threshold: 0, // Trigger as soon as it appears in the viewport
@@ -71,8 +75,13 @@ const Homepage = () => {
 
   const handleSubmitSearch = (e) => {
     e.preventDefault()
-    setSearch('')
-    fetchStories()
+    setPage(1)
+    console.log('page',page)
+    setStories([])
+    if(page === 1 ){
+      console.log('we in the if')
+      fetchStories()
+    }
   }
 
   const handleStorySelect = (story) => {
@@ -95,6 +104,7 @@ const Homepage = () => {
           value={search}
           onChange={handleInputChange}
         />
+        <button type="submit">Search</button>
       </form>
       <ul>
         <li>ALL</li>
