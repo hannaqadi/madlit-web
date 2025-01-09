@@ -7,40 +7,51 @@ const Homepage = () => {
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1);
-  const [hasMore, setHasMore] = useState(true);
+  const [hasMore, setHasMore] = useState(false);
+  const [loading, setLoading] = useState(false);
   const loader = useRef(null);
-
+  const isInitialRender = useRef(true);
 
   const fetchStories = async () => {
+    if (loading) return;
+    setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=10`);
+      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3`);
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
       const data = await response.json();
-      console.log(data)
-      setStories(prev => [...prev, ...data.stories]); // Append new stories
+      setStories(prev => [...prev, ...data.stories]); 
       setHasMore(page < data.totalPages); // Check if there are more pages
     } catch (err) {
       console.log(err.message);
+    }finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
+    //Prevents initial render
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return; 
+    }
     fetchStories();
   }, [page])
 
-
-  const handleInputChange = (e) => {
-    setSearch(e.target.value)
-  }
-
   useEffect(() => {
-    const observer = new IntersectionObserver(entries => {
-      if (entries[0].isIntersecting && hasMore) {
-        setPage(prev => prev + 1);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        if (entries[0].isIntersecting && hasMore && !loading) {
+          setPage((prev) => prev + 1);
+        }
+      },
+      {
+        root: null, 
+        rootMargin: "200px", // Trigger when the element is within 200px of the viewport
+        threshold: 0, // Trigger as soon as it appears in the viewport
       }
-    });
+    );
 
     if (loader.current) {
       observer.observe(loader.current);
@@ -50,8 +61,13 @@ const Homepage = () => {
       if (loader.current) {
         observer.unobserve(loader.current);
       }
+      observer.disconnect();
     };
-  }, [loader, hasMore]);
+  }, [hasMore, loading]);
+  
+  const handleInputChange = (e) => {
+    setSearch(e.target.value)
+  }
 
   const handleSubmitSearch = (e) => {
     e.preventDefault()
@@ -102,7 +118,12 @@ const Homepage = () => {
           <p>Whoops! There's nothing here </p>
         )
         }
-        {hasMore && <div ref={loader}>Loading more stories...</div>}
+        {hasMore && (
+          <div ref={loader} style={{ height: "50px", backgroundColor: "lightgray" }}>
+            Loading more stories...
+          </div>
+        )}
+        {!hasMore && <p>Loaded!</p>}
       </div>
     </div>
   )
