@@ -7,7 +7,7 @@ const Homepage = () => {
   const navigate = useNavigate();
   const [genres, setGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
-  const [selectedGenresStyle, setSelectedGenresStyle] = useState(false)
+  const [showGenres, setShowGenres] = useState(false)
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1);
@@ -21,7 +21,7 @@ const Homepage = () => {
       const response = await fetch(`http://localhost:5000/api/genres`)
       const data = await response.json()
       setGenres(data.genres)
-      console.log('genre data:', data)
+      console.log(data.genres)
     } catch (error) {
       console.log(error.message)
     }
@@ -110,21 +110,33 @@ const Homepage = () => {
     localStorage.setItem('story', JSON.stringify(story))
     navigate('/Playing')
   }
+  const toggleGenreDropdown = () => {
+    setShowGenres((prev) => !prev);
+  };
 
   const handleGenreSelect = (index) => {
-    setSelectedGenres((prev) => {
-      // Check if the index is already in the array
-      if (prev.includes(index)) {
-        // Remove the index if it's already selected
-        return prev.filter((element) => element !== index);
-      } else {
-        // Otherwise, add the index to the array
-        return [...prev, index];
-      }
-    });
-    fetchSelectedGenres()
+    toggleGenreDropdown();
+
+    setGenres((prevGenres) =>
+      prevGenres.map((genre, i) =>
+        i === index
+          ? { ...genre, selected: !genre.selected }
+          : genre
+      )
+    );
+
+    fetchSelectedGenres();
+  };
+
+  const removeAddedGenres = (index) => {
+    setGenres((prev) =>
+      prev.map((g, i) =>
+        i === index ? { ...g, selected: false } : g
+      )
+    );
   }
-  console.log('selectedGenres', selectedGenres)
+  console.log('genres', genres);
+
   return (
     <div>
       <p>Homepage</p>
@@ -136,26 +148,25 @@ const Homepage = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <ul>
-
-        {genres.map((genre, index) => (
-          <li key={index} 
-          onClick={() => handleGenreSelect(index)}
-          className={selectedGenres.includes(index) ? styles.genreHighlight : ""}
-          >
-            {genre.name}
-          </li>
-        ))
-        }
-
-        <li>ALL</li>
-        <li>Adventure</li>
-        <li>Horror</li>
-        <li>Scifi</li>
-        <li>Silly</li>
-        <li>Comedy</li>
-        <li>Animals</li>
-      </ul>
+      <button onClick={() => toggleGenreDropdown()}>Genre</button>
+      {genres
+        .filter((genre) => genre.selected)
+        .map((genre, index) => (
+          <span key={genre.id} onClick={() => removeAddedGenres(index)}>{genre.name}</span>
+        ))}
+      {showGenres ? (
+        <ul>
+          {genres.map((genre, index) => (
+            <li
+              key={index}
+              onClick={() => handleGenreSelect(index)}
+              className={genre.selected ? styles.genreHighlight : ""}
+            >
+              {genre.name}
+            </li>
+          ))}
+        </ul>
+      ) : null}
       <div>
         {stories.length > 0 ? (
           stories.map((story, index) => (
