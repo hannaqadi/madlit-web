@@ -1,9 +1,13 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { StoryArr } from "./StoryArr";
+import styles from "./Hompage.module.css"
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const [genres, setGenres] = useState([])
+  const [selectedGenres, setSelectedGenres] = useState([])
+  const [selectedGenresStyle, setSelectedGenresStyle] = useState(false)
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1);
@@ -12,23 +16,34 @@ const Homepage = () => {
   const loader = useRef(null);
   const isInitialRender = useRef(true);
 
+  const fetchGenres = async () => {
+    try {
+      const response = await fetch(`http://localhost:5000/api/genres`)
+      const data = await response.json()
+      setGenres(data.genres)
+      console.log('genre data:', data)
+    } catch (error) {
+      console.log(error.message)
+    }
+  }
+
+  const fetchSelectedGenres = () => {
+
+  }
   const fetchStories = async () => {
     if (loading) return;
     setLoading(true);
     try {
-      console.log('starting fetch')
-      console.log('page in fetch', page)
       const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}`);
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
       const data = await response.json();
-      console.log('data', data)
-      setStories(prev => [...prev, ...data.stories]); 
+      setStories(prev => [...prev, ...data.stories]);
       setHasMore(page < data.totalPages); // Check if there are more pages
-    } catch (err) {
-      console.log(err.message);
-    }finally {
+    } catch (error) {
+      console.log(error.message);
+    } finally {
       setLoading(false);
     }
   };
@@ -37,8 +52,9 @@ const Homepage = () => {
     //Prevents initial render
     if (isInitialRender.current) {
       isInitialRender.current = false;
-      return; 
+      return;
     }
+    fetchGenres();
     fetchStories();
   }, [page])
 
@@ -51,7 +67,7 @@ const Homepage = () => {
       },
       {
         //TODO: Allow loading to show slightly before triggering observer
-        root: null, 
+        root: null,
         rootMargin: "200px", // Trigger when the element is within 200px of the viewport
         threshold: 0, // Trigger as soon as it appears in the viewport
       }
@@ -68,7 +84,7 @@ const Homepage = () => {
       observer.disconnect();
     };
   }, [hasMore, loading]);
-  
+
   const handleInputChange = (e) => {
     setSearch(e.target.value)
   }
@@ -76,9 +92,9 @@ const Homepage = () => {
   const handleSubmitSearch = (e) => {
     e.preventDefault()
     setPage(1)
-    console.log('page',page)
+    console.log('page', page)
     setStories([])
-    if(page === 1 ){
+    if (page === 1) {
       console.log('we in the if')
       fetchStories()
     }
@@ -95,6 +111,20 @@ const Homepage = () => {
     navigate('/Playing')
   }
 
+  const handleGenreSelect = (index) => {
+    setSelectedGenres((prev) => {
+      // Check if the index is already in the array
+      if (prev.includes(index)) {
+        // Remove the index if it's already selected
+        return prev.filter((element) => element !== index);
+      } else {
+        // Otherwise, add the index to the array
+        return [...prev, index];
+      }
+    });
+    fetchSelectedGenres()
+  }
+  console.log('selectedGenres', selectedGenres)
   return (
     <div>
       <p>Homepage</p>
@@ -107,6 +137,17 @@ const Homepage = () => {
         <button type="submit">Search</button>
       </form>
       <ul>
+
+        {genres.map((genre, index) => (
+          <li key={index} 
+          onClick={() => handleGenreSelect(index)}
+          className={selectedGenres.includes(index) ? styles.genreHighlight : ""}
+          >
+            {genre.name}
+          </li>
+        ))
+        }
+
         <li>ALL</li>
         <li>Adventure</li>
         <li>Horror</li>
