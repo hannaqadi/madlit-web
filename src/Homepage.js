@@ -20,7 +20,10 @@ const Homepage = () => {
     try {
       const response = await fetch(`http://localhost:5000/api/genres`)
       const data = await response.json()
-      setGenres(data.genres)
+      const addSelected = data.genres.map((genre) => {
+        return { ...genre, selected: false }
+      })
+      setGenres(addSelected)
       console.log(data.genres)
     } catch (error) {
       console.log(error.message)
@@ -114,28 +117,39 @@ const Homepage = () => {
     setShowGenres((prev) => !prev);
   };
 
-  const handleGenreSelect = (index) => {
+  const handleGenreSelect = (genre) => {
     toggleGenreDropdown();
+    
+    //Set genres state to selected true
+    setGenres((prev) => {
+      return prev.map((g) => {
+        return g.id === genre.id
+          ? { ...g, selected: !g.selected } // Toggle selected
+          : g 
+      })
+    });
 
-    setGenres((prevGenres) =>
-      prevGenres.map((genre, i) =>
-        i === index
-          ? { ...genre, selected: !genre.selected }
-          : genre
-      )
+    setSelectedGenres((prevGenres) =>
+      [...prevGenres, genre]
     );
-
     fetchSelectedGenres();
   };
 
-  const removeAddedGenres = (index) => {
-    setGenres((prev) =>
-      prev.map((g, i) =>
-        i === index ? { ...g, selected: false } : g
-      )
+  const removeAddedGenres = (genre) => {
+    //Set selected to false for genres
+    setGenres((prevGenres) => {
+      return prevGenres.map((g, i) => {
+      return  g.id === genre.id
+          ? { ...g, selected: false }
+          : g
+      })
+    })
+
+    // Remove the object of selected genre from selectedGenre
+    setSelectedGenres((prev) =>
+      prev.filter((g) => g.id !== genre.id)
     );
   }
-  console.log('genres', genres);
 
   return (
     <div>
@@ -149,22 +163,25 @@ const Homepage = () => {
         <button type="submit">Search</button>
       </form>
       <button onClick={() => toggleGenreDropdown()}>Genre</button>
-      {genres
-        .filter((genre) => genre.selected)
-        .map((genre, index) => (
-          <span key={genre.id} onClick={() => removeAddedGenres(index)}>{genre.name}</span>
+      {selectedGenres
+        .map((genre) => (
+          <span key={genre.id} onClick={() => removeAddedGenres(genre)}>{genre.name}</span>
         ))}
       {showGenres ? (
         <ul>
-          {genres.map((genre, index) => (
-            <li
-              key={index}
-              onClick={() => handleGenreSelect(index)}
-              className={genre.selected ? styles.genreHighlight : ""}
-            >
-              {genre.name}
-            </li>
-          ))}
+          {genres.map((genre, index) => {
+            if (genre.selected === false) {
+              return (
+                <li
+                  key={index}
+                  onClick={() => handleGenreSelect(genre)}
+                  className={genre.selected ? styles.genreHighlight : ""}
+                >
+                  {genre.name}
+                </li>
+              )
+            }
+          })}
         </ul>
       ) : null}
       <div>
