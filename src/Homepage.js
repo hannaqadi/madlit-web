@@ -30,14 +30,14 @@ const Homepage = () => {
     }
   }
 
-  const fetchSelectedGenres = () => {
-
-  }
   const fetchStories = async () => {
     if (loading) return;
     setLoading(true);
     try {
-      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}`);
+      const genreIds = selectedGenres.map((genre) => genre.id).join(',');
+      console.log(genreIds)
+
+      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}&genres=${encodeURIComponent(genreIds)}`);
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
@@ -57,9 +57,12 @@ const Homepage = () => {
       isInitialRender.current = false;
       return;
     }
-    fetchGenres();
     fetchStories();
-  }, [page])
+  }, [page, selectedGenres])
+
+  useEffect(()=>{
+    fetchGenres();
+  },[])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -95,10 +98,8 @@ const Homepage = () => {
   const handleSubmitSearch = (e) => {
     e.preventDefault()
     setPage(1)
-    console.log('page', page)
     setStories([])
     if (page === 1) {
-      console.log('we in the if')
       fetchStories()
     }
   }
@@ -119,27 +120,25 @@ const Homepage = () => {
 
   const handleGenreSelect = (genre) => {
     toggleGenreDropdown();
-    
     //Set genres state to selected true
     setGenres((prev) => {
       return prev.map((g) => {
         return g.id === genre.id
           ? { ...g, selected: !g.selected } // Toggle selected
-          : g 
+          : g
       })
     });
 
     setSelectedGenres((prevGenres) =>
       [...prevGenres, genre]
     );
-    fetchSelectedGenres();
   };
 
   const removeAddedGenres = (genre) => {
     //Set selected to false for genres
     setGenres((prevGenres) => {
       return prevGenres.map((g, i) => {
-      return  g.id === genre.id
+        return g.id === genre.id
           ? { ...g, selected: false }
           : g
       })
