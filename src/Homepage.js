@@ -35,7 +35,6 @@ const Homepage = () => {
     setLoading(true);
     try {
       const genreIds = selectedGenres.map((genre) => genre.id).join(',');
-      console.log(genreIds)
 
       const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}&genres=${encodeURIComponent(genreIds)}`);
       if (!response.ok) {
@@ -60,9 +59,10 @@ const Homepage = () => {
     fetchStories();
   }, [page, selectedGenres])
 
-  useEffect(()=>{
+  //Fetches genres ONLY on page load
+  useEffect(() => {
     fetchGenres();
-  },[])
+  }, [])
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -132,6 +132,9 @@ const Homepage = () => {
     setSelectedGenres((prevGenres) =>
       [...prevGenres, genre]
     );
+
+    setStories([]);
+    setPage(1);
   };
 
   const removeAddedGenres = (genre) => {
