@@ -1,5 +1,7 @@
-import { BrowserRouter, Routes, Route, createBrowserRouter, RouterProvider } from 'react-router-dom';
+import {createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import { ThemeProvider } from "./ThemeContext";
+
 import Homepage from './Homepage';
 import Playing from './Playing';
 import Reading from './Reading';
@@ -12,7 +14,9 @@ const router = createBrowserRouter([
 ])
 function App() {
   return (
-    <RouterProvider router={router} />
+    <ThemeProvider>
+      <RouterProvider router={router} />
+    </ThemeProvider>
   );
 }
 

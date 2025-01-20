@@ -2,9 +2,11 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { StoryArr } from "./StoryArr";
 import styles from "./Hompage.module.css"
+import { useTheme } from "./ThemeContext";
 
 const Homepage = () => {
   const navigate = useNavigate();
+  const { theme, toggleTheme } = useTheme();
   const [genres, setGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
   const [showGenres, setShowGenres] = useState(false)
@@ -16,6 +18,10 @@ const Homepage = () => {
   const loader = useRef(null);
   const isInitialRender = useRef(true);
 
+  useEffect(()=>{
+    document.documentElement.setAttribute("data-theme", theme);
+  }, [theme])
+  
   const fetchGenres = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/genres`)
@@ -164,6 +170,8 @@ const Homepage = () => {
         />
         <button type="submit">Search</button>
       </form>
+      <p>current theme : {theme}</p>
+      <button onClick={toggleTheme}>toggle light mode dark mode</button>
       <button onClick={() => toggleGenreDropdown()}>Genre</button>
       {selectedGenres
         .map((genre) => (
