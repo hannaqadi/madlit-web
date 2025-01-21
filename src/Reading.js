@@ -5,10 +5,11 @@ const Reading = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const story = JSON.parse(localStorage.getItem('story'))
-  const { finalInputs = [] } = location.state || {};
+  const finalInputs  = location.state 
   const [isLoaded, setIsLoaded] = useState(false)
   const [finalStory, setFinalStory] = useState([])
 
+  
   useEffect(() => {
     window.history.pushState(null, '', window.location.href);
 
@@ -26,8 +27,8 @@ const Reading = () => {
 
   useEffect(() => {
     const combineText = () => {
-      if (story && Array.isArray(story.storySeq)) {
-        let tempStory = [...story.storySeq];
+      if (story && Array.isArray(story.story_seq)) {
+        let tempStory = [...story.story_seq];
         let j = 0;
         for (let i = 0; i < tempStory.length; i++) {
           if (tempStory[i] === "" && j < finalInputs.length) {
@@ -48,7 +49,7 @@ const Reading = () => {
       setFinalStory([]);
       combineText();
     }
-  }, [finalInputs, story, finalStory.length, isLoaded])
+  }, [])
 
   const handlePlayAgain = () => {
     localStorage.removeItem('finalStory')
