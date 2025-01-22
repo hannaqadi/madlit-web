@@ -7,6 +7,7 @@ import { useTheme } from "./ThemeContext";
 const Homepage = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
+  const [showSettings, setShowSettings] = useState(false)
   const [genres, setGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
   const [showGenres, setShowGenres] = useState(false)
@@ -18,10 +19,10 @@ const Homepage = () => {
   const loader = useRef(null);
   const isInitialRender = useRef(true);
 
-  useEffect(()=>{
+  useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme])
-  
+
   const fetchGenres = async () => {
     try {
       const response = await fetch(`http://localhost:5000/api/genres`)
@@ -159,6 +160,9 @@ const Homepage = () => {
     );
   }
 
+  const settingsDropDown = () => {
+    setShowSettings((prev) => !prev)
+  }
   return (
     <div>
       <p>Homepage</p>
@@ -170,8 +174,17 @@ const Homepage = () => {
         />
         <button type="submit">Search</button>
       </form>
-      <p>current theme : {theme}</p>
-      <button onClick={toggleTheme}>toggle light mode dark mode</button>
+      <button onClick={() => navigate('/Info')}>Info</button>
+      <button onClick={settingsDropDown}>Settings</button>
+      {showSettings ? (
+        <div>
+           <p>current theme : {theme}</p>
+           <button onClick={toggleTheme}>toggle light mode dark mode</button>
+          <button>Share</button>
+          <button>Contact</button>
+        </div>
+      ) : <></>}
+     
       <button onClick={() => toggleGenreDropdown()}>Genre</button>
       {selectedGenres
         .map((genre) => (
