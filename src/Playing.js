@@ -1,31 +1,34 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useBlocker } from 'react-router-dom'
+import { PartsOfSpeech } from "./Info";
 
 const Playing = () => {
   const navigate = useNavigate();
   const [story, setStory] = useState(null);
   const [inputs, setInputs] = useState({});
   const [loaded, setLoaded] = useState(false)
+  const [showHelp, setShowHelp] = useState(false)
+  const [helpContent, setHelpContent] = useState('')
   const isSubmittingRef = useRef(false);
   const isDirtyRef = useRef(false)
 
-  useEffect(()=>{
+  useEffect(() => {
     try {
       const storyData = localStorage.getItem("story");
       console.log(storyData)
       if (storyData) {
         const parsedStory = JSON.parse(storyData);
-        setStory(parsedStory); 
+        setStory(parsedStory);
         setLoaded(true);
       } else {
-        setLoaded(false); 
+        setLoaded(false);
       }
     } catch (error) {
       console.error("Error parsing story from localStorage:", error);
       setLoaded(false);
     }
-  },[])
+  }, [])
 
   const handleChange = (index, event) => {
     const { value } = event.target
@@ -70,12 +73,20 @@ const Playing = () => {
     isDirtyRef.current = false;
   }, [])
 
+  const helpButton = (part) => {
+    //TODO: Convert 'part' to all lowercase to match PartsOfSpeech 
+    for (const property in PartsOfSpeech) {
+      if (property === part) {
+        setHelpContent(PartsOfSpeech[property])
+        setShowHelp(true)
+      }
+    }
+  }
   return (
     <div>
       {loaded ? <div>
         <h3>Playing</h3>
         <p>{story.title}</p>
-        <p>hello?</p>
         <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
         <div>
           <form onSubmit={handleSubmit}>
@@ -87,9 +98,15 @@ const Playing = () => {
                   value={inputs[index] || ""}
                   onChange={(e) => handleChange(index, e)}
                 />
+                <button onClick={()=> helpButton(part)} type="button">info</button>
+                {showHelp ?
+                  <div>
+                    <p>{helpContent}</p>
+                  </div>
+                  : <></>}
               </div>
             ))}
-            <button>Submit</button>
+            <button type="submit">Submit</button>
           </form>
         </div>
       </div> : <p>oops!</p>}
