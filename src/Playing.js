@@ -10,6 +10,7 @@ const Playing = () => {
   const [loaded, setLoaded] = useState(false)
   const [showHelp, setShowHelp] = useState(false)
   const [helpContent, setHelpContent] = useState('')
+  const [rightIndex, setRightIndex] = useState(null)
   const isSubmittingRef = useRef(false);
   const isDirtyRef = useRef(false)
 
@@ -73,14 +74,19 @@ const Playing = () => {
     isDirtyRef.current = false;
   }, [])
 
-  const helpButton = (part) => {
-    //TODO: Convert 'part' to all lowercase to match PartsOfSpeech 
-    for (const property in PartsOfSpeech) {
-      if (property === part) {
-        setHelpContent(PartsOfSpeech[property])
-        setShowHelp(true)
+  const helpButton = (part, index) => {
+    //TODO FOR BETA: Convert 'part' to all lowercase to match PartsOfSpeech 
+    if (rightIndex === index) {
+      setRightIndex(null)
+    } else {
+      for (const property in PartsOfSpeech) {
+        if (property === part) {
+          setHelpContent(PartsOfSpeech[property])
+          setRightIndex(index)
+        }
       }
     }
+
   }
   return (
     <div>
@@ -98,12 +104,13 @@ const Playing = () => {
                   value={inputs[index] || ""}
                   onChange={(e) => handleChange(index, e)}
                 />
-                <button onClick={()=> helpButton(part)} type="button">info</button>
-                {showHelp ?
+                <button onClick={() => helpButton(part, index)} type="button">info</button>
+                {rightIndex === index ?
                   <div>
                     <p>{helpContent}</p>
                   </div>
-                  : <></>}
+                  : <></>
+                }
               </div>
             ))}
             <button type="submit">Submit</button>
