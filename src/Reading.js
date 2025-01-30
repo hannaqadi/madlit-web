@@ -5,7 +5,7 @@ const Reading = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const story = JSON.parse(localStorage.getItem('story'))
-  const finalInputs  = location.state 
+  const finalInputs  = location.state?.finalInputs 
   const [isLoaded, setIsLoaded] = useState(false)
   const [finalStory, setFinalStory] = useState([])
 
@@ -24,8 +24,13 @@ const Reading = () => {
     };
   }, [navigate]);
 
-
   useEffect(() => {
+    if (!finalInputs) {
+      // If finalInputs is missing, redirect back to Playing or Home
+      console.log("finalInputs missing, redirecting to Playing...");
+      navigate("/", { replace: true });
+      return;
+    }
     const combineText = () => {
       if (story && Array.isArray(story.story_seq)) {
         let tempStory = [...story.story_seq];
@@ -36,6 +41,7 @@ const Reading = () => {
             j++;
           }
         }
+        
         if (j === finalInputs.length) {
           setFinalStory(tempStory);
           localStorage.setItem('finalStory', JSON.stringify(tempStory));
