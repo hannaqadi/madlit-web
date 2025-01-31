@@ -50,6 +50,7 @@ const Homepage = () => {
       const data = await response.json();
       setStories(prev => [...prev, ...data.stories]);
       setHasMore(page < data.totalPages); // Check if there are more pages
+      console.log(stories)
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -163,6 +164,15 @@ const Homepage = () => {
   const settingsDropDown = () => {
     setShowSettings((prev) => !prev)
   }
+
+  const storiesGenre = (story) => {
+    const genre = genres.find((genre) => genre.id === story.genre_id);
+    if (genre) {
+      return (
+        <p> Genre: {genre.name}</p>
+      )
+    }
+  }
   return (
     <div>
       <p>Homepage</p>
@@ -178,13 +188,13 @@ const Homepage = () => {
       <button onClick={settingsDropDown}>Settings</button>
       {showSettings ? (
         <div>
-           <p>current theme : {theme}</p>
-           <button onClick={toggleTheme}>toggle light mode dark mode</button>
+          <p>current theme : {theme}</p>
+          <button onClick={toggleTheme}>toggle light mode dark mode</button>
           <button>Share</button>
           <button>Contact</button>
         </div>
       ) : <></>}
-     
+
       <button onClick={() => toggleGenreDropdown()}>Genre</button>
       {selectedGenres
         .map((genre) => (
@@ -212,7 +222,7 @@ const Homepage = () => {
           stories.map((story, index) => (
             <div key={index} onClick={() => handleStorySelect(story)}>
               <h3>{story.title}</h3>
-              <p>genre: {story.genre}</p>
+              {storiesGenre(story)}
               <p>{story.story}</p>
             </div>
           ))
