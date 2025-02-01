@@ -50,7 +50,6 @@ const Homepage = () => {
       const data = await response.json();
       setStories(prev => [...prev, ...data.stories]);
       setHasMore(page < data.totalPages); // Check if there are more pages
-      console.log(stories)
     } catch (error) {
       console.log(error.message);
     } finally {
@@ -174,68 +173,92 @@ const Homepage = () => {
     }
   }
   return (
-    <div>
-      <p>Homepage</p>
-      <form onSubmit={handleSubmitSearch}>
-        <input
-          placeholder="Search"
-          value={search}
-          onChange={handleInputChange}
-        />
-        <button type="submit">Search</button>
-      </form>
-      <button onClick={() => navigate('/Info')}>Info</button>
-      <button onClick={settingsDropDown}>Settings</button>
-      {showSettings ? (
-        <div>
-          <p>current theme : {theme}</p>
-          <button onClick={toggleTheme}>toggle light mode dark mode</button>
-          <button>Share</button>
-          <button>Contact</button>
-        </div>
-      ) : <></>}
+    <div className={styles.main}>
+      <div className={styles.outerGrid}>
+        <div></div>
+        <div className={styles.mainGrid}>
 
-      <button onClick={() => toggleGenreDropdown()}>Genre</button>
-      {selectedGenres
-        .map((genre) => (
-          <span key={genre.id} onClick={() => removeAddedGenres(genre)}>{genre.name}</span>
-        ))}
-      {showGenres ? (
-        <ul>
-          {genres.map((genre, index) => {
-            if (genre.selected === false) {
-              return (
-                <li
-                  key={index}
-                  onClick={() => handleGenreSelect(genre)}
-                  className={genre.selected ? styles.genreHighlight : ""}
-                >
-                  {genre.name}
-                </li>
-              )
-            }
-          })}
-        </ul>
-      ) : null}
-      <div>
-        {stories.length > 0 ? (
-          stories.map((story, index) => (
-            <div key={index} onClick={() => handleStorySelect(story)}>
-              <h3>{story.title}</h3>
-              {storiesGenre(story)}
-              <p>{story.story}</p>
+          <div className={styles.logoAndInfo}>
+            <p>Homepage, MADLIT</p>
+            <div>
+              <button onClick={() => navigate('/Info')}>Info</button>
+              <button onClick={settingsDropDown}>Settings</button>
             </div>
-          ))
-        ) : (
-          <p>Whoops! There's nothing here </p>
-        )
-        }
-        {hasMore && (
-          <div ref={loader} style={{ height: "50px", backgroundColor: "lightgray" }}>
-            Loading more stories...
+            {showSettings ? (
+              <div>
+                <p>current theme : {theme}</p>
+                <button onClick={toggleTheme}>toggle light mode dark mode</button>
+                <button>Share</button>
+                <button>Contact</button>
+              </div>
+            ) : <></>}
           </div>
-        )}
-        {!hasMore && <p>Loaded!</p>}
+
+          <div className={styles.searchContainer}>
+            <div className={styles.searchBar}>
+              <form onSubmit={handleSubmitSearch}>
+
+                <input
+                  placeholder="Search"
+                  value={search}
+                  onChange={handleInputChange}
+                />
+
+                <button type="submit">Search</button>
+              </form>
+            </div>
+          </div>
+
+
+          <div>
+            <button onClick={() => toggleGenreDropdown()}>Genre</button>
+            {selectedGenres
+              .map((genre) => (
+                <span key={genre.id} onClick={() => removeAddedGenres(genre)}>{genre.name}</span>
+              ))}
+            {showGenres ? (
+              <ul>
+                {genres.map((genre, index) => {
+                  if (genre.selected === false) {
+                    return (
+                      <li
+                        key={index}
+                        onClick={() => handleGenreSelect(genre)}
+                        className={genre.selected ? styles.genreHighlight : ""}
+                      >
+                        {genre.name}
+                      </li>
+                    )
+                  }
+                })}
+              </ul>
+            ) : null}
+
+          </div>
+
+          <div>
+            {stories.length > 0 ? (
+              stories.map((story, index) => (
+                <div key={index} onClick={() => handleStorySelect(story)}>
+                  <h3>{story.title}</h3>
+                  {storiesGenre(story)}
+                  <p>{story.story}</p>
+                </div>
+              ))
+            ) : (
+              <p>Whoops! There's nothing here </p>
+            )
+            }
+            {hasMore && (
+              <div ref={loader} style={{ height: "50px", backgroundColor: "lightgray" }}>
+                Loading more stories...
+              </div>
+            )}
+            {!hasMore && <p>Loaded!</p>}
+          </div>
+
+        </div>
+        <div></div>
       </div>
     </div>
   )

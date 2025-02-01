@@ -1,4 +1,47 @@
-.genreHighlight {
-  background-color: aquamarine;
-  cursor: pointer;
+.main{
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+}
+
+.outerGrid{
+  display:grid;
+  grid-template-columns: 1fr 2fr 1fr;
+}
+.mainGrid{
+  display:grid;
+  grid-template-rows: auto auto auto auto; 
+}
+
+.logoAndInfo{
+  display:flex;
+  justify-content:space-around;
+  align-items: center;
+  background-color: grey;
+}
+.searchContainer {
+  display: flex;
+  justify-content: center; 
+  width: 100%;
+}
+
+.searchBar {
+  display: flex; 
+  align-items: center; 
+}
+
+.searchBar input {
+  padding: 10px;
+  border-radius: 20px 0 0 20px; 
+  border: 1px solid #ccc;
+  font-size: 16px;
+  width: 300px; 
+}
+
+.searchBar button {
+  padding: 10px;
+  margin-left: -1px; 
+  border-radius: 0 20px 20px 0; 
+  background-color: #ccc;
+  border: 1px solid #ccc; 
 }
