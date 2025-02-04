@@ -179,7 +179,7 @@ const Homepage = () => {
         <div className={styles.mainGrid}>
 
           <div className={styles.logoAndInfo}>
-            <p>Homepage, MADLIT</p>
+            <h4>MADLIT</h4>
             <div>
               <button onClick={() => navigate('/Info')}>Info</button>
               <button onClick={settingsDropDown}>Settings</button>
@@ -197,43 +197,50 @@ const Homepage = () => {
           <div className={styles.searchContainer}>
             <div className={styles.searchBar}>
               <form onSubmit={handleSubmitSearch}>
-
                 <input
                   placeholder="Search"
                   value={search}
                   onChange={handleInputChange}
                 />
-
                 <button type="submit">Search</button>
               </form>
             </div>
           </div>
 
 
-          <div>
-            <button onClick={() => toggleGenreDropdown()}>Genre</button>
-            {selectedGenres
-              .map((genre) => (
-                <span key={genre.id} onClick={() => removeAddedGenres(genre)}>{genre.name}</span>
-              ))}
-            {showGenres ? (
-              <ul>
-                {genres.map((genre, index) => {
-                  if (genre.selected === false) {
-                    return (
-                      <li
-                        key={index}
-                        onClick={() => handleGenreSelect(genre)}
-                        className={genre.selected ? styles.genreHighlight : ""}
-                      >
-                        {genre.name}
-                      </li>
-                    )
-                  }
-                })}
-              </ul>
-            ) : null}
+          <div className={styles.genreContainer}>
+            <div className={styles.genreSelectContainer}>
+              <button onClick={() => toggleGenreDropdown()} className={styles.genreButton}>Genre</button>
+              {selectedGenres
+                .map((genre) => (
+                  <span
+                    key={genre.id}
+                    onClick={() => removeAddedGenres(genre)}
+                    className={styles.selectedGenre}>
+                    {genre.name}
+                  </span>
+                ))}
+            </div>
 
+            <div className={styles.genreList}>
+              {showGenres ? (
+                <ul>
+                  {genres.map((genre, index) => {
+                    if (genre.selected === false) {
+                      return (
+                        <li
+                          key={index}
+                          onClick={() => handleGenreSelect(genre)}
+                        >
+                          {genre.name}
+                        </li>
+                      )
+                    }
+                  })}
+                </ul>
+              ) : null}
+            </div>
+            
           </div>
 
           <div>

@@ -1,47 +1,106 @@
-.main{
+.main {
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
 }
 
-.outerGrid{
-  display:grid;
+.outerGrid {
+  display: grid;
   grid-template-columns: 1fr 2fr 1fr;
 }
-.mainGrid{
-  display:grid;
-  grid-template-rows: auto auto auto auto; 
+
+.mainGrid {
+  display: grid;
+  grid-template-rows: auto auto auto auto;
 }
 
-.logoAndInfo{
-  display:flex;
-  justify-content:space-around;
+.logoAndInfo {
+  display: flex;
+  justify-content: space-around;
   align-items: center;
   background-color: grey;
 }
+
+/*-----------------------------------Search Bar--------------------------------------*/
 .searchContainer {
   display: flex;
-  justify-content: center; 
+  justify-content: center;
   width: 100%;
+  margin-top: 20px;
 }
 
 .searchBar {
-  display: flex; 
-  align-items: center; 
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 300px;
 }
 
 .searchBar input {
   padding: 10px;
-  border-radius: 20px 0 0 20px; 
+  border-radius: 20px;
   border: 1px solid #ccc;
   font-size: 16px;
-  width: 300px; 
+  width: 100%;
+  padding-right: 40px;
 }
 
 .searchBar button {
-  padding: 10px;
-  margin-left: -1px; 
-  border-radius: 0 20px 20px 0; 
+  position: absolute;
+  right: 5px;
+  top: 50%;
+  transform: translateY(-50%);
+  border: none;
   background-color: #ccc;
-  border: 1px solid #ccc; 
+  padding: 8px 12px;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+/*------------------------------------Genre Select-------------------------------------*/
+.genreContainer {
+  margin-top: 10px;
+}
+
+.genreButton {
+  border: solid;
+  border-width: 1px;
+  border-color: #898989;
+  border-radius: 21px;
+  background-color: white;
+  cursor: pointer;
+}
+
+.genreSelectContainer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.selectedGenre { 
+  border-radius: 5px;
+  background-color: #B7DDC4;
+  padding: 0px 8px;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.genreList{
+  margin-top: 10px;
+}
+
+.genreList ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px; 
+  list-style: none; 
+  padding: 0;
+  margin: 0;
+}
+
+.genreList li {
+  padding: 3px 12px;
+  border-radius: 20px;
+  border: 1px solid #ccc;
+  background-color: #f0f0f0;
+  cursor: pointer;
 }
