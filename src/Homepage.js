@@ -168,7 +168,7 @@ const Homepage = () => {
     const genre = genres.find((genre) => genre.id === story.genre_id);
     if (genre) {
       return (
-        <p> Genre: {genre.name}</p>
+        <h5> Genre: {genre.name}</h5>
       )
     }
   }
@@ -243,10 +243,14 @@ const Homepage = () => {
             
           </div>
 
-          <div>
+          <div className={styles.storyCardContainer}>
             {stories.length > 0 ? (
               stories.map((story, index) => (
-                <div key={index} onClick={() => handleStorySelect(story)}>
+                <div 
+                key={index} 
+                onClick={() => handleStorySelect(story)}
+                className={styles.storyCard}
+                >
                   <h3>{story.title}</h3>
                   {storiesGenre(story)}
                   <p>{story.story}</p>
