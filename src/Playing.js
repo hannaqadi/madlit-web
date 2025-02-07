@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useBlocker } from 'react-router-dom'
 import { PartsOfSpeech } from "./Info";
+import styles from "./Playing.module.css"
 
 const Playing = () => {
   const navigate = useNavigate();
@@ -89,35 +90,46 @@ const Playing = () => {
 
   }
   return (
-    <div>
-      {loaded ? <div>
-        <h3>Playing</h3>
-        <p>{story.title}</p>
-        <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
-        <div>
-          <form onSubmit={handleSubmit}>
-            {story.parts_of_speech.map((part, index) => (
-              <div key={index}>
-                <p>{part}</p>
-                <input
-                  type="text"
-                  value={inputs[index] || ""}
-                  onChange={(e) => handleChange(index, e)}
-                />
-                <button onClick={() => helpButton(part, index)} type="button">info</button>
-                {rightIndex === index ?
-                  <div>
-                    <p>{helpContent}</p>
-                  </div>
-                  : <></>
-                }
-              </div>
-            ))}
-            <button type="submit">Submit</button>
-          </form>
-        </div>
-      </div> : <p>oops!</p>}
+    <div className={styles.main}>
+      <div className={styles.outerGrid}>
+        <div></div>
 
+        {loaded ? <div className={styles.mainGrid}>
+       
+          <div className={styles.storyInfo}>
+            <h3>{story.title}</h3>
+            <p>{story.story}</p>
+            <p>Enter in the parts of speech</p>
+          </div>
+
+          <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
+          <div className={styles.inputsContainer}>
+            <form onSubmit={handleSubmit}>
+              {story.parts_of_speech.map((part, index) => (
+                <div key={index}>
+                  <p>{part}</p>
+                  <input
+                    type="text"
+                    value={inputs[index] || ""}
+                    onChange={(e) => handleChange(index, e)}
+                  />
+                  <button onClick={() => helpButton(part, index)} type="button">info</button>
+                  {rightIndex === index ?
+                    <div>
+                      <p>{helpContent}</p>
+                    </div>
+                    : <></>
+                  }
+                </div>
+              ))}
+              <button type="submit">Submit</button>
+            </form>
+          </div>
+        </div>
+          : <p>oops!</p>}
+        <div></div>
+
+      </div>
     </div>
   )
 }

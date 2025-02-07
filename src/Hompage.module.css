@@ -124,6 +124,9 @@
   padding:5px;
   cursor:pointer;
 }
+ .storyCard:hover{
+  background-color: antiquewhite;
+ }
 
 .storyCard h3 {
   margin:0;
