@@ -95,7 +95,7 @@ const Playing = () => {
         <div></div>
 
         {loaded ? <div className={styles.mainGrid}>
-       
+
           <div className={styles.storyInfo}>
             <h3>{story.title}</h3>
             <p>{story.story}</p>
@@ -103,17 +103,23 @@ const Playing = () => {
           </div>
 
           <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
-          <div className={styles.inputsContainer}>
-            <form onSubmit={handleSubmit}>
-              {story.parts_of_speech.map((part, index) => (
-                <div key={index}>
+
+          <form
+            onSubmit={handleSubmit}
+            className={styles.inputsForm}
+          >
+            {story.parts_of_speech.map((part, index) => (
+              <div key={index} className={styles.inputsContainer}>
+                <div className={styles.inputWrapper}>                
                   <p>{part}</p>
-                  <input
-                    type="text"
-                    value={inputs[index] || ""}
-                    onChange={(e) => handleChange(index, e)}
-                  />
-                  <button onClick={() => helpButton(part, index)} type="button">info</button>
+                  <div className={styles.inputItemsContainer}>
+                    <input
+                      type="text"
+                      value={inputs[index] || ""}
+                      onChange={(e) => handleChange(index, e)}
+                    />
+                    <button onClick={() => helpButton(part, index)} type="button">info</button>
+                  </div>
                   {rightIndex === index ?
                     <div>
                       <p>{helpContent}</p>
@@ -121,10 +127,12 @@ const Playing = () => {
                     : <></>
                   }
                 </div>
-              ))}
-              <button type="submit">Submit</button>
-            </form>
-          </div>
+
+              </div>
+            ))}
+            <button type="submit">Submit</button>
+          </form>
+
         </div>
           : <p>oops!</p>}
         <div></div>

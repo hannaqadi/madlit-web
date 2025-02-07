@@ -11,34 +11,56 @@
 
 .mainGrid {
   display: grid;
-  grid-template-rows: auto auto ;
+  grid-template-rows: auto auto;
 }
 
-.storyInfo{
- display:flex;
- flex-direction: column;
+.storyInfo {
+  display: flex;
+  flex-direction: column;
 
 }
 
-.inputsContainer{
+.inputsForm {
   width: 100%;
 }
 
-.inputsContainer p {
-  margin:0;
-  padding:0;
-}
-.inputsContainer form {
+.inputsContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width:100%;
+  width: 100%;
+  background-color: firebrick;
 }
-.inputsContainer input {
+.inputItemsWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns p and inputItemsContainer to the left */
+  width: 100%; /* Match input width */
+  margin: 0 auto; /* Centers the wrapper */
+  background-color: antiquewhite;
+}
+
+.inputsContainer p {
+  background-color: blueviolet;
+  align-self: flex-start; /* Moves the p tag to the left */
+  margin: 0;
+  padding: 0;
+}
+
+.inputItemsContainer {
+  width: 100%;
+  background-color: aqua;
+}
+
+.inputsForm input {
   margin-bottom: 10px;
   background-color: #ccc;
   border-style: none;
   border-radius: 5px;
-  height:30px;
-  width: 100%
+  height: 30px;
+  width: 70%
+}
+
+.inputsForm button{
+  margin-left: 5px;
 }
