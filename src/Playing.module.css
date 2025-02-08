@@ -29,27 +29,30 @@
   flex-direction: column;
   align-items: center;
   width: 100%;
-  background-color: firebrick;
-}
-.inputItemsWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start; /* Aligns p and inputItemsContainer to the left */
-  width: 100%; /* Match input width */
-  margin: 0 auto; /* Centers the wrapper */
-  background-color: antiquewhite;
 }
 
-.inputsContainer p {
-  background-color: blueviolet;
-  align-self: flex-start; /* Moves the p tag to the left */
+.submitButton {
+  align-self: flex-start;
+  cursor: pointer;
+}
+
+.centerWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 40%;
+}
+
+.centerWrapper p {
+  align-self: flex-start;
   margin: 0;
   padding: 0;
 }
 
 .inputItemsContainer {
+  display: flex;
+  flex-wrap: nowrap;
   width: 100%;
-  background-color: aqua;
 }
 
 .inputsForm input {
@@ -58,9 +61,10 @@
   border-style: none;
   border-radius: 5px;
   height: 30px;
-  width: 70%
+  width: 100%
 }
 
-.inputsForm button{
+.inputsForm button {
   margin-left: 5px;
+  cursor: pointer;
 }

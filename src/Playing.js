@@ -104,13 +104,10 @@ const Playing = () => {
 
           <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
 
-          <form
-            onSubmit={handleSubmit}
-            className={styles.inputsForm}
-          >
-            {story.parts_of_speech.map((part, index) => (
-              <div key={index} className={styles.inputsContainer}>
-                <div className={styles.inputWrapper}>                
+          <form onSubmit={handleSubmit} className={styles.inputsForm}>
+            <div className={styles.inputsContainer}>
+              {story.parts_of_speech.map((part, index) => (
+                <div key={index} className={styles.centerWrapper}>
                   <p>{part}</p>
                   <div className={styles.inputItemsContainer}>
                     <input
@@ -127,10 +124,12 @@ const Playing = () => {
                     : <></>
                   }
                 </div>
-
+              ))}
+              <div className={styles.centerWrapper}>
+                <button type="submit" className={styles.submitButton}>Submit</button>
               </div>
-            ))}
-            <button type="submit">Submit</button>
+            </div>
+
           </form>
 
         </div>
