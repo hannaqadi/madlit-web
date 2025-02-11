@@ -1,15 +1,16 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
+import styles from './Reading.module.css';
 
 const Reading = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const story = JSON.parse(localStorage.getItem('story'))
-  const finalInputs  = location.state?.finalInputs 
+  const finalInputs = location.state?.finalInputs
   const [isLoaded, setIsLoaded] = useState(false)
   const [finalStory, setFinalStory] = useState([])
 
-  
+
   useEffect(() => {
     window.history.pushState(null, '', window.location.href);
 
@@ -41,7 +42,7 @@ const Reading = () => {
             j++;
           }
         }
-        
+
         if (j === finalInputs.length) {
           setFinalStory(tempStory);
           localStorage.setItem('finalStory', JSON.stringify(tempStory));
@@ -63,26 +64,31 @@ const Reading = () => {
   }
 
   return (
-    <div>
-      <p>Reading</p>
-      {!isLoaded && !!!localStorage.getItem('finalStory') ? (
-        <div>
-          <p>Loading...</p>
-        </div>
-      ) : (
-        <div>
-          <p>
-          {(finalStory.length > 0 
-        ? finalStory 
-        : JSON.parse(localStorage.getItem('finalStory')) || [])
-        .join(' ')}
-          </p>
-          <button onClick={handlePlayAgain} >Play again</button>
-          <button onClick={() => navigate('/')}>Back to Stories</button>
-        </div>
-      )
-      }
-
+    <div className={styles.main}>
+      <div className={styles.outerGrid}>
+        <div></div>
+        {!isLoaded && !!!localStorage.getItem('finalStory') ? (
+          <div>
+            <p>Loading...</p>
+          </div>
+        ) : (
+          <div className={styles.mainGrid}>
+            <p>Reading</p>
+            <p>
+              {(finalStory.length > 0
+                ? finalStory
+                : JSON.parse(localStorage.getItem('finalStory')) || [])
+                .join(' ')}
+            </p>
+            <div className={styles.buttonContainer}>
+              <button onClick={handlePlayAgain} >Play again</button>
+              <button onClick={() => navigate('/')}>Back to Stories</button>
+            </div>
+          </div>
+        )
+        }
+        <div></div>
+      </div>
     </div>
   )
 }
