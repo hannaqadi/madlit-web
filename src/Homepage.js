@@ -174,82 +174,95 @@ const Homepage = () => {
   }
   return (
     <div className={styles.main}>
+      <div className={styles.bannerGrid}>
+        <div></div>
+        <div className={styles.logoAndNav}>
+          <h4>MADLIT</h4>
+          <div>
+            <button onClick={() => navigate('/Info')}>I</button>
+            <button onClick={settingsDropDown}>S</button>
+          </div>
+          {showSettings ? (
+            <div>
+              <p>current theme : {theme}</p>
+              <button onClick={toggleTheme}>toggle light mode dark mode</button>
+              <button>Share</button>
+              <button>Contact</button>
+            </div>
+          ) : <></>}
+        </div>
+        <div></div>
+
+      </div>
       <div className={styles.outerGrid}>
         <div></div>
         <div className={styles.mainGrid}>
-
-          <div className={styles.logoAndInfo}>
-            <h4>MADLIT</h4>
-            <div>
-              <button onClick={() => navigate('/Info')}>Info</button>
-              <button onClick={settingsDropDown}>Settings</button>
-            </div>
-            {showSettings ? (
-              <div>
-                <p>current theme : {theme}</p>
-                <button onClick={toggleTheme}>toggle light mode dark mode</button>
-                <button>Share</button>
-                <button>Contact</button>
-              </div>
-            ) : <></>}
+          <div className={styles.header}>
+            <h1>Lets Play a Game!</h1>
+            <h2>Choose a story genre or search by title :3</h2>
           </div>
 
+          {/*Search bar and genre button*/}
           <div className={styles.searchContainer}>
-            <div className={styles.searchBar}>
-              <form onSubmit={handleSubmitSearch}>
-                <input
-                  placeholder="Search"
-                  value={search}
-                  onChange={handleInputChange}
-                />
-                <button type="submit">Search</button>
-              </form>
-            </div>
-          </div>
+            <form
+              className={styles.searchBar}
+              onSubmit={handleSubmitSearch}
+            >
+              <input
+                placeholder="Search stories..."
+                value={search}
+                onChange={handleInputChange}
+              />
+              <button type="submit">S</button>
+            </form>
 
-
-          <div className={styles.genreContainer}>
             <div className={styles.genreSelectContainer}>
-              <button onClick={() => toggleGenreDropdown()} className={styles.genreButton}>Genre</button>
-              {selectedGenres
-                .map((genre) => (
-                  <span
-                    key={genre.id}
-                    onClick={() => removeAddedGenres(genre)}
-                    className={styles.selectedGenre}>
-                    {genre.name}
-                  </span>
-                ))}
+              <button
+                onClick={() => toggleGenreDropdown()}
+                className={styles.genreButton}>
+                Genres
+              </button>
             </div>
-
-            <div className={styles.genreList}>
-              {showGenres ? (
-                <ul>
-                  {genres.map((genre, index) => {
-                    if (genre.selected === false) {
-                      return (
-                        <li
-                          key={index}
-                          onClick={() => handleGenreSelect(genre)}
-                        >
-                          {genre.name}
-                        </li>
-                      )
-                    }
-                  })}
-                </ul>
-              ) : null}
-            </div>
-            
           </div>
-
+          {/*Selected Genres*/}
+          <div>
+            {selectedGenres
+              .map((genre) => (
+                <span
+                  key={genre.id}
+                  onClick={() => removeAddedGenres(genre)}
+                  className={styles.selectedGenre}>
+                  {genre.name}
+                </span>
+              ))}
+          </div>
+          {/*Genre List*/}
+          <div className={styles.genreList}>
+            {showGenres ? (
+              <ul>
+                {genres.map((genre, index) => {
+                  if (genre.selected === false) {
+                    return (
+                      <li
+                        key={index}
+                        onClick={() => handleGenreSelect(genre)}
+                      >
+                        {genre.name}
+                      </li>
+                    )
+                  }
+                })}
+              </ul>
+            ) : null}
+          </div>
+          {/*Story cards*/}
           <div className={styles.storyCardContainer}>
             {stories.length > 0 ? (
               stories.map((story, index) => (
-                <div 
-                key={index} 
-                onClick={() => handleStorySelect(story)}
-                className={styles.storyCard}
+                <div
+                  key={index}
+                  onClick={() => handleStorySelect(story)}
+                  className={styles.storyCard}
                 >
                   <h3>{story.title}</h3>
                   {storiesGenre(story)}

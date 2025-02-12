@@ -4,6 +4,40 @@
   overflow-x: hidden;
 }
 
+.bannerGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  width: 100vw;
+  height: 8vh;
+  background-color: #5440D5;
+  z-index: -1;
+}
+
+.logoAndNav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.logoAndNav h4 {
+  margin: 0;
+  padding: 0;
+  color: #B6A4FF;
+}
+
+.logoAndNav div :first-child{
+  margin: 0;
+  padding: 0;
+}
+
+.logoAndNav button {
+  border-style: none;
+  border-radius: 7px;
+  background-color: #0C185C;
+  color:#B6A4FF
+}
+
 .outerGrid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -11,38 +45,54 @@
 
 .mainGrid {
   display: grid;
-  grid-template-rows: auto auto auto auto;
+  grid-template-rows: 8vh auto auto auto auto;
 }
 
-.logoAndInfo {
+.header {
   display: flex;
-  justify-content: space-around;
+  flex-direction: column;
   align-items: center;
-  background-color: grey;
+  margin-top: 15px;
+}
+
+.header h1 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: medium;
+}
+
+
+.header h2 {
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: medium;
 }
 
 /*-----------------------------------Search Bar--------------------------------------*/
 .searchContainer {
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
   width: 100%;
   margin-top: 20px;
+  margin-bottom: 10px;
 }
 
 .searchBar {
   position: relative;
   display: flex;
   align-items: center;
-  width: 300px;
+  width: 90%;
 }
 
 .searchBar input {
   padding: 10px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  font-size: 16px;
+  border-radius: 7px;
+  border-style: none;
+  font-size: 12px;
   width: 100%;
-  padding-right: 40px;
+  background-color: #E2DFEE;
 }
 
 .searchBar button {
@@ -59,43 +109,47 @@
 
 /*------------------------------------Genre Select-------------------------------------*/
 .genreContainer {
-  margin-top: 10px;
-}
-
-.genreButton {
-  border: solid;
-  border-width: 1px;
-  border-color: #898989;
-  border-radius: 21px;
-  background-color: white;
-  cursor: pointer;
+  margin-left: 10px;
 }
 
 .genreSelectContainer {
   display: flex;
   flex-wrap: wrap;
+  margin-left: 10px;  
+  align-items: center;
 }
 
-.selectedGenre { 
+.genreButton {
+  border: solid;
+  border-width: 1px;
+  border-color: #464F83;
+  border-radius: 7px;
+  background-color: #FDFCFF;
+  cursor: pointer;
+  height:30px;
+}
+
+.selectedGenre {
   border-radius: 5px;
   background-color: #B7DDC4;
   padding: 0px 8px;
-  margin: 5px;
+  margin-top: 5px;
+  margin-left:5px;
   cursor: pointer;
 }
 
-.genreList{
+.genreList {
+  margin-bottom: 10px;
   margin-top: 10px;
 }
 
 .genreList ul {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px; 
-  list-style: none; 
+  gap: 10px;
+  list-style: none;
   padding: 0;
-  margin-bottom: 10px;
-  margin-top: 10px
+ margin:0;
 }
 
 .genreList li {
@@ -108,38 +162,38 @@
 
 
 /*---------------------------------------Stories---------------------------------*/
-.storyCardContainer{
-  display:flex;
+.storyCardContainer {
+  display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 10px;
 }
-.storyCard{
-  border-style: solid;
-  border-color: #898989;
-  border-width: 2px;
-  border-radius: 15px;
+
+.storyCard {
+  border-style: none;
+  border-radius: 7px;
   background-color: #B7DDC4;
   width: 30%;
-  padding:5px;
-  cursor:pointer;
+  padding: 5px;
+  cursor: pointer;
 }
- .storyCard:hover{
+
+.storyCard:hover {
   background-color: antiquewhite;
- }
+}
 
 .storyCard h3 {
-  margin:0;
+  margin: 0;
   padding: 0;
 }
 
 .storyCard h5 {
   margin-top: 5px;
-  margin-bottom:0;
+  margin-bottom: 0;
   padding: 0;
 }
 
 .storyCard p {
-  margin:0;
+  margin: 0;
   padding: 0;
 }
