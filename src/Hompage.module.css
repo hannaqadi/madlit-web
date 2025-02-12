@@ -1,16 +1,17 @@
 .main {
+  display: flex;
+  flex-direction: column;
   width: 100vw;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
-.bannerGrid {
+.topBannerGrid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   width: 100vw;
   height: 8vh;
   background-color: #5440D5;
-  z-index: -1;
 }
 
 .logoAndNav {
@@ -26,7 +27,7 @@
   color: #B6A4FF;
 }
 
-.logoAndNav div :first-child{
+.logoAndNav div :first-child {
   margin: 0;
   padding: 0;
 }
@@ -35,17 +36,27 @@
   border-style: none;
   border-radius: 7px;
   background-color: #0C185C;
-  color:#B6A4FF
+  color: #B6A4FF
 }
 
 .outerGrid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
+  overflow: hidden;
 }
 
 .mainGrid {
   display: grid;
   grid-template-rows: 8vh auto auto auto auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  height: 100%;
+}
+
+.mainGrid::-webkit-scrollbar {
+  display: none;
 }
 
 .header {
@@ -115,7 +126,7 @@
 .genreSelectContainer {
   display: flex;
   flex-wrap: wrap;
-  margin-left: 10px;  
+  margin-left: 10px;
   align-items: center;
 }
 
@@ -126,7 +137,7 @@
   border-radius: 7px;
   background-color: #FDFCFF;
   cursor: pointer;
-  height:30px;
+  height: 30px;
 }
 
 .selectedGenre {
@@ -134,7 +145,7 @@
   background-color: #B7DDC4;
   padding: 0px 8px;
   margin-top: 5px;
-  margin-left:5px;
+  margin-left: 5px;
   cursor: pointer;
 }
 
@@ -149,7 +160,7 @@
   gap: 10px;
   list-style: none;
   padding: 0;
- margin:0;
+  margin: 0;
 }
 
 .genreList li {
@@ -196,4 +207,12 @@
 .storyCard p {
   margin: 0;
   padding: 0;
+}
+
+/*----------------------------------------Bottom Banner ---------------------*/
+
+.bottomBanner {
+  width: 100vw;
+  height: 8vh;
+  background-color: #5440D5;
 }

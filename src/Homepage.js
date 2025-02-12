@@ -18,10 +18,25 @@ const Homepage = () => {
   const [loading, setLoading] = useState(false);
   const loader = useRef(null);
   const isInitialRender = useRef(true);
+  const mainGridRef = useRef(null);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
   }, [theme])
+
+  /*Global Scrolling*/
+  useEffect(() => {
+    const handleGlobalScroll = (event) => {
+      if (mainGridRef.current) {
+        mainGridRef.current.scrollTop += event.deltaY;
+        event.preventDefault();
+      }
+    };
+    document.addEventListener('wheel', handleGlobalScroll, { passive: false });
+    return () => {
+      document.removeEventListener('wheel', handleGlobalScroll);
+    };
+  }, []);
 
   const fetchGenres = async () => {
     try {
@@ -174,7 +189,7 @@ const Homepage = () => {
   }
   return (
     <div className={styles.main}>
-      <div className={styles.bannerGrid}>
+      <div className={styles.topBannerGrid}>
         <div></div>
         <div className={styles.logoAndNav}>
           <h4>MADLIT</h4>
@@ -196,7 +211,7 @@ const Homepage = () => {
       </div>
       <div className={styles.outerGrid}>
         <div></div>
-        <div className={styles.mainGrid}>
+        <div className={styles.mainGrid} ref={mainGridRef}>
           <div className={styles.header}>
             <h1>Lets Play a Game!</h1>
             <h2>Choose a story genre or search by title :3</h2>
@@ -258,17 +273,20 @@ const Homepage = () => {
           {/*Story cards*/}
           <div className={styles.storyCardContainer}>
             {stories.length > 0 ? (
-              stories.map((story, index) => (
+              stories.map((story, index) => {
+                const colors = [' #3DD8ED', '#FAC87F', ' #FFAFE2'];
+                return(
                 <div
                   key={index}
                   onClick={() => handleStorySelect(story)}
+                  style={{ backgroundColor: colors[index % 3] }}
                   className={styles.storyCard}
                 >
                   <h3>{story.title}</h3>
                   {storiesGenre(story)}
                   <p>{story.story}</p>
                 </div>
-              ))
+              )})
             ) : (
               <p>Whoops! There's nothing here </p>
             )
@@ -284,6 +302,7 @@ const Homepage = () => {
         </div>
         <div></div>
       </div>
+      <div className={styles.bottomBanner}></div>
     </div>
   )
 }
