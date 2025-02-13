@@ -1,3 +1,14 @@
+body{
+  font-family: "K2D", serif;
+}
+
+input::placeholder {
+  font-family: "K2D", serif;
+}
+
+button {
+  font-family: "K2D", serif;
+}
 .main {
   display: flex;
   flex-direction: column;
@@ -5,7 +16,7 @@
   height: 100vh;
   overflow: hidden;
 }
-
+/*---------------------------------------Top Banner-----------------------------------*/
 .topBannerGrid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -19,12 +30,16 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
+  position:relative;
 }
 
 .logoAndNav h4 {
   margin: 0;
   padding: 0;
   color: #B6A4FF;
+  font-family: "Permanent Marker", serif;
+  font-weight: normal;
+  font-size: 48px;
 }
 
 .logoAndNav div :first-child {
@@ -32,13 +47,30 @@
   padding: 0;
 }
 
-.logoAndNav button {
+.buttonNavs{
+  display: flex;
+  flex-direction: column;
+padding: 0
+}
+
+.buttonNavs button{
   border-style: none;
   border-radius: 7px;
   background-color: #0C185C;
-  color: #B6A4FF
+  color: #B6A4FF;
+  height:56px;
+  width: 54px;
+  margin:5px;
+  cursor: pointer;
 }
 
+.settingsNavContainer{
+  display:flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/*-----------------------------------------------Central Grids-----------------------------------*/
 .outerGrid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
@@ -196,6 +228,8 @@
 .storyCard h3 {
   margin: 0;
   padding: 0;
+  font-family: "Permanent Marker", serif;
+  font-weight: normal;
 }
 
 .storyCard h5 {

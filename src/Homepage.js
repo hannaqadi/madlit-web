@@ -192,19 +192,21 @@ const Homepage = () => {
       <div className={styles.topBannerGrid}>
         <div></div>
         <div className={styles.logoAndNav}>
-          <h4>MADLIT</h4>
-          <div>
-            <button onClick={() => navigate('/Info')}>I</button>
-            <button onClick={settingsDropDown}>S</button>
-          </div>
-          {showSettings ? (
+          <h4>MAD LIT</h4>
+          <div className={styles.buttonNavs}>
             <div>
-              <p>current theme : {theme}</p>
-              <button onClick={toggleTheme}>toggle light mode dark mode</button>
-              <button>Share</button>
-              <button>Contact</button>
+              <button onClick={() => navigate('/Info')}>I</button>
+              <button onClick={settingsDropDown}>S</button>
             </div>
-          ) : <></>}
+            {showSettings ? (
+              <div className={styles.settingsNavContainer}>
+                <p>current theme : {theme}</p>
+                <button onClick={toggleTheme}>toggle light mode dark mode</button>
+                <button>Share</button>
+                <button>Contact</button>
+              </div>
+            ) : <></>}
+          </div>
         </div>
         <div></div>
 
@@ -275,18 +277,19 @@ const Homepage = () => {
             {stories.length > 0 ? (
               stories.map((story, index) => {
                 const colors = [' #3DD8ED', '#FAC87F', ' #FFAFE2'];
-                return(
-                <div
-                  key={index}
-                  onClick={() => handleStorySelect(story)}
-                  style={{ backgroundColor: colors[index % 3] }}
-                  className={styles.storyCard}
-                >
-                  <h3>{story.title}</h3>
-                  {storiesGenre(story)}
-                  <p>{story.story}</p>
-                </div>
-              )})
+                return (
+                  <div
+                    key={index}
+                    onClick={() => handleStorySelect(story)}
+                    style={{ backgroundColor: colors[index % 3] }}
+                    className={styles.storyCard}
+                  >
+                    <h3>{story.title}</h3>
+                    {storiesGenre(story)}
+                    <p>{story.story}</p>
+                  </div>
+                )
+              })
             ) : (
               <p>Whoops! There's nothing here </p>
             )
