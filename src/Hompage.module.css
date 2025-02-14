@@ -15,6 +15,8 @@ button {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  flex-grow: 0;
+  flex-shrink: 0;
 }
 /*---------------------------------------Top Banner-----------------------------------*/
 .topBannerGrid {
@@ -75,6 +77,7 @@ padding: 0
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   overflow: hidden;
+  height:100%;
 }
 
 .mainGrid {
@@ -213,16 +216,15 @@ padding: 0
 }
 
 .storyCard {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 0;
+  flex-shrink: 0; 
+  width: auto; 
+  max-width: 100%; /* Prevents overflow issues */
   border-style: none;
   border-radius: 7px;
-  background-color: #B7DDC4;
-  width: 30%;
-  padding: 5px;
   cursor: pointer;
-}
-
-.storyCard:hover {
-  background-color: antiquewhite;
 }
 
 .storyCard h3 {
@@ -240,12 +242,17 @@ padding: 0
 
 .storyCard p {
   margin: 0;
-  padding: 0;
+  padding-left: 20px;
+  padding-right: 10px;
+  padding-top:0;
+  padding-bottom: 0;
 }
 
 /*----------------------------------------Bottom Banner ---------------------*/
 
 .bottomBanner {
+  flex-grow:0;
+  flex-shrink:0;
   width: 100vw;
   height: 8vh;
   background-color: #5440D5;
