@@ -9,7 +9,7 @@ const Playing = () => {
   const [story, setStory] = useState(null);
   const [inputs, setInputs] = useState({});
   const [filled, setFilled] = useState(false)
-  const [errorStyle, setErrorStyle] = useState(styles.inputsError)
+  const [errorStyle] = useState(styles.inputsError)
   const [errorButton, setErrorButton] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [helpContent, setHelpContent] = useState('')
@@ -40,10 +40,10 @@ const Playing = () => {
 
   /* Checks if inputs are filled */
   useEffect(() => {
-    setFilled(false)
+    setFilled(true)
     for (let key in inputs) {
       if (inputs[key].trim() === "") {
-        setFilled(true)
+        setFilled(false)
         break; // Stop checking if we find an empty value
       }
     }
@@ -72,7 +72,7 @@ const Playing = () => {
 
   const handleSubmit = (event) => {
     console.log('SIBTIT')
-    if (filled === false) {
+    if (filled === true) {
       event.preventDefault();
       isSubmittingRef.current = true;
       isDirtyRef.current = false;
@@ -113,9 +113,6 @@ const Playing = () => {
     }
   }
 
-  const inputEmptyError = () => {
-
-  }
 
   return (
     <div className={styles.main}>
@@ -142,7 +139,7 @@ const Playing = () => {
                       type="text"
                       value={inputs[index] || ""}
                       onChange={(e) => handleChange(index, e)}
-                      className={errorButton ? errorStyle : styles.inputsComplete}
+                      className={(!inputs[index] && errorButton) ? errorStyle : styles.inputsComplete}
                     />
                     <button onClick={() => helpButton(part, index)} type="button">info</button>
                   </div>
@@ -154,11 +151,11 @@ const Playing = () => {
                   }
                 </div>
               ))}
-              <div className={styles.centerWrapper}>
+              <div className={styles.finishedButtonContainer}>
                 <button
                   type="submit"
                   onClick={handleSubmit}
-                  className={filled ? styles.inputButtonEnabled : styles.inputButtonDisabled}>
+                  className={filled ? styles.finishedButtonEnabled : styles.finishedButtonDisabled}>
                   Finished
                 </button>
               </div>
