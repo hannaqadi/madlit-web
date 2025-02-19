@@ -31,11 +31,6 @@
   width: 100%;
 }
 
-.submitButton {
-  align-self: flex-start;
-  cursor: pointer;
-}
-
 .centerWrapper {
   display: flex;
   flex-direction: column;
@@ -84,7 +79,28 @@
   width: 100%
 }
 
-.inputsForm button {
+/* .inputsForm button {
+  margin-left: 5px;
+  height: 30px;
+  border-style: none;
+  cursor: pointer;
+} */
+/* 
+.submitButton {
+  align-self: flex-start;
+  cursor: pointer;
+} */
+
+.inputsButtonEnabled{
+  background-color: #0C185C;
+  color:#B6A4FF;
+  margin-left: 5px;
+  height: 300px;
+  border-style: none;
+  cursor: pointer;
+}
+
+.inputButtonDisabled{
   margin-left: 5px;
   height: 30px;
   border-style: none;

@@ -9,6 +9,8 @@ const Playing = () => {
   const [story, setStory] = useState(null);
   const [inputs, setInputs] = useState({});
   const [filled, setFilled] = useState(false)
+  const [errorStyle, setErrorStyle] = useState(styles.inputsError)
+  const [errorButton, setErrorButton] = useState(false)
   const [loaded, setLoaded] = useState(false)
   const [helpContent, setHelpContent] = useState('')
   const [rightIndex, setRightIndex] = useState(null)
@@ -86,6 +88,8 @@ const Playing = () => {
         }
       })
     } else {
+      event.preventDefault();
+      setErrorButton(true)
       console.log('it aint filled')
     }
   }
@@ -109,7 +113,7 @@ const Playing = () => {
     }
   }
 
-  const inputEmptyError = ()=>{
+  const inputEmptyError = () => {
 
   }
 
@@ -138,7 +142,7 @@ const Playing = () => {
                       type="text"
                       value={inputs[index] || ""}
                       onChange={(e) => handleChange(index, e)}
-                      className={filled ? styles.inputsComplete : styles.inputsError}
+                      className={errorButton ? errorStyle : styles.inputsComplete}
                     />
                     <button onClick={() => helpButton(part, index)} type="button">info</button>
                   </div>
@@ -151,7 +155,12 @@ const Playing = () => {
                 </div>
               ))}
               <div className={styles.centerWrapper}>
-                <button type="submit" disabled={filled} onClick={handleSubmit} className={styles.submitButton}>Finished</button>
+                <button
+                  type="submit"
+                  onClick={handleSubmit}
+                  className={filled ? styles.inputButtonEnabled : styles.inputButtonDisabled}>
+                  Finished
+                </button>
               </div>
             </div>
 
