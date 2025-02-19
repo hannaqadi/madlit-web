@@ -21,25 +21,27 @@
 
 /*----------------------------------------Inputs------------------------------------ */
 .inputsForm {
-  width: 100%;
+  font-size: 20px;
+  margin: 1px;
 }
 
 .inputsContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  display: grid;
+  grid-template-columns: auto;
+  justify-items: center;
   width: 100%;
 }
 
-.centerWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  width: 40%;
+.inputWrapper {
+  width: 100%;
 }
 
-.centerWrapper p {
-  align-self: flex-start;
+.posInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.posInfo p {
   margin: 0;
   padding: 0;
 }
@@ -51,12 +53,12 @@
 }
 
 
-.inputsComplete{
+.inputsComplete {
   margin-bottom: 10px;
   background-color: #E2DFEE;
   border-style: none;
   border-radius: 5px;
-  height: 30px;
+  height: 58px;
   width: 100%
 }
 
@@ -68,14 +70,14 @@
   outline: none;
 }
 
-.inputsError{
+.inputsError {
   margin-bottom: 10px;
   background-color: #FDFCFF;
   border-style: solid;
   border-color: red;
-  border-width: 5px;
+  border-width: 2px;
   border-radius: 5px;
-  height: 30px;
+  height: 58px;
   width: 100%
 }
 
@@ -83,26 +85,27 @@
   outline: none;
 }
 
-.finishedButtonContainer{
-  width:100%;
-  display:flex;
+.finishedButtonContainer {
+  width: 100%;
+  display: flex;
   justify-content: center;
 }
-.finishedButtonEnabled{
+
+.finishedButtonEnabled {
   background-color: #0C185C;
-  color:#B6A4FF;
+  color: #B6A4FF;
   margin-left: 5px;
-  height: 40px;
-  width:80%;
+  height: 64px;
+  width: 90%;
   border-style: none;
   border-radius: 7px;
   cursor: pointer;
 }
 
-.finishedButtonDisabled{
+.finishedButtonDisabled {
   margin-left: 5px;
-  height: 40px;
-  width:80%;
+  height: 64px;
+  width: 90%;
   border-style: none;
   border-radius: 7px;
   cursor: pointer;

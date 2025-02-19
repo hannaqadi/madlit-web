@@ -132,8 +132,13 @@ const Playing = () => {
           <form className={styles.inputsForm}>
             <div className={styles.inputsContainer}>
               {story.parts_of_speech.map((part, index) => (
-                <div key={index} className={styles.centerWrapper}>
+                <div key={index} className={styles.inputWrapper}>
+                  <div className={styles.posInfo}>
                   <p>{part}</p>
+                  <button onClick={() => helpButton(part, index)} type="button">
+                      info
+                    </button>
+                    </div>
                   <div className={styles.inputItemsContainer}>
                     <input
                       type="text"
@@ -141,7 +146,7 @@ const Playing = () => {
                       onChange={(e) => handleChange(index, e)}
                       className={(!inputs[index] && errorButton) ? errorStyle : styles.inputsComplete}
                     />
-                    <button onClick={() => helpButton(part, index)} type="button">info</button>
+                    
                   </div>
                   {rightIndex === index ?
                     <div>
@@ -156,7 +161,7 @@ const Playing = () => {
                   type="submit"
                   onClick={handleSubmit}
                   className={filled ? styles.finishedButtonEnabled : styles.finishedButtonDisabled}>
-                  Finished
+                  Finished!
                 </button>
               </div>
             </div>
