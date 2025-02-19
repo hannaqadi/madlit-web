@@ -8,8 +8,8 @@ const Playing = () => {
   const navigate = useNavigate();
   const [story, setStory] = useState(null);
   const [inputs, setInputs] = useState({});
+  const [filled, setFilled] = useState(false)
   const [loaded, setLoaded] = useState(false)
-  const [showHelp, setShowHelp] = useState(false)
   const [helpContent, setHelpContent] = useState('')
   const [rightIndex, setRightIndex] = useState(null)
   const isSubmittingRef = useRef(false);
@@ -18,10 +18,13 @@ const Playing = () => {
   useEffect(() => {
     try {
       const storyData = localStorage.getItem("story");
-      console.log(storyData)
       if (storyData) {
         const parsedStory = JSON.parse(storyData);
         setStory(parsedStory);
+        {/*Set up for inputs*/ }
+        for (let i = 0; i < parsedStory.parts_of_speech.length; i++) {
+          inputs[i] = ""
+        }
         setLoaded(true);
       } else {
         setLoaded(false);
@@ -30,7 +33,19 @@ const Playing = () => {
       console.error("Error parsing story from localStorage:", error);
       setLoaded(false);
     }
+
   }, [])
+
+  /* Checks if inputs are filled */
+  useEffect(() => {
+    setFilled(false)
+    for (let key in inputs) {
+      if (inputs[key].trim() === "") {
+        setFilled(true)
+        break; // Stop checking if we find an empty value
+      }
+    }
+  }, [inputs])
 
   const handleChange = (index, event) => {
     const { value } = event.target
@@ -54,20 +69,25 @@ const Playing = () => {
   }
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    isSubmittingRef.current = true;
-    isDirtyRef.current = false;
+    console.log('SIBTIT')
+    if (filled === false) {
+      event.preventDefault();
+      isSubmittingRef.current = true;
+      isDirtyRef.current = false;
 
-    let finalInputs = []
-    for (const value in inputs) {
-      finalInputs.push(inputs[value])
-    }
-
-    navigate('/Reading', {
-      state: {
-        finalInputs: finalInputs
+      let finalInputs = []
+      for (const keys in inputs) {
+        finalInputs.push(inputs[keys])
       }
-    })
+
+      navigate('/Reading', {
+        state: {
+          finalInputs: finalInputs
+        }
+      })
+    } else {
+      console.log('it aint filled')
+    }
   }
 
   useEffect(() => {
@@ -87,8 +107,12 @@ const Playing = () => {
         }
       }
     }
+  }
+
+  const inputEmptyError = ()=>{
 
   }
+
   return (
     <div className={styles.main}>
       <div className={styles.outerGrid}>
@@ -104,7 +128,7 @@ const Playing = () => {
 
           <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
 
-          <form onSubmit={handleSubmit} className={styles.inputsForm}>
+          <form className={styles.inputsForm}>
             <div className={styles.inputsContainer}>
               {story.parts_of_speech.map((part, index) => (
                 <div key={index} className={styles.centerWrapper}>
@@ -114,6 +138,7 @@ const Playing = () => {
                       type="text"
                       value={inputs[index] || ""}
                       onChange={(e) => handleChange(index, e)}
+                      className={filled ? styles.inputsComplete : styles.inputsError}
                     />
                     <button onClick={() => helpButton(part, index)} type="button">info</button>
                   </div>
@@ -126,7 +151,7 @@ const Playing = () => {
                 </div>
               ))}
               <div className={styles.centerWrapper}>
-                <button type="submit" className={styles.submitButton}>Submit</button>
+                <button type="submit" disabled={filled} onClick={handleSubmit} className={styles.submitButton}>Finished</button>
               </div>
             </div>
 
