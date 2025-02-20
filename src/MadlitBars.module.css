@@ -1,0 +1,62 @@
+.topBannerGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  width: 100vw;
+  height: 8vh;
+  background-color: #5440D5;
+}
+
+.logoAndNav {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position:relative;
+}
+
+.logoAndNav h4 {
+  margin: 0;
+  padding: 0;
+  color: #B6A4FF;
+  font-family: "Permanent Marker", serif;
+  font-weight: normal;
+  font-size: 48px;
+}
+
+.logoAndNav div :first-child {
+  margin: 0;
+  padding: 0;
+}
+
+.buttonNavs{
+  display: flex;
+  flex-direction: column;
+padding: 0
+}
+
+.buttonNavs button{
+  border-style: none;
+  border-radius: 7px;
+  background-color: #0C185C;
+  color: #B6A4FF;
+  height:56px;
+  width: 54px;
+  margin:5px;
+  cursor: pointer;
+}
+
+.settingsNavContainer{
+  display:flex;
+  flex-direction: column;
+  z-index: 1;
+}
+
+/*----------------------------------------Bottom Banner ---------------------*/
+
+.bottomBanner {
+  flex-grow:0;
+  flex-shrink:0;
+  width: 100vw;
+  height: 8vh;
+  background-color: #5440D5;
+}

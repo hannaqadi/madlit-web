@@ -1,13 +1,12 @@
 import { useState, useEffect, useRef } from "react";
 import { useNavigate } from "react-router-dom";
-import { StoryArr } from "./StoryArr";
+import { TopBarNav } from "./MadlitBars";
+import { BottomBanner } from "./MadlitBars";
 import styles from "./Hompage.module.css"
-import { useTheme } from "./ThemeContext";
+
 
 const Homepage = () => {
   const navigate = useNavigate();
-  const { theme, toggleTheme } = useTheme();
-  const [showSettings, setShowSettings] = useState(false)
   const [genres, setGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
   const [showGenres, setShowGenres] = useState(false)
@@ -19,10 +18,6 @@ const Homepage = () => {
   const loader = useRef(null);
   const isInitialRender = useRef(true);
   const mainGridRef = useRef(null);
-
-  useEffect(() => {
-    document.documentElement.setAttribute("data-theme", theme);
-  }, [theme])
 
   /*Global Scrolling*/
   useEffect(() => {
@@ -175,10 +170,6 @@ const Homepage = () => {
     );
   }
 
-  const settingsDropDown = () => {
-    setShowSettings((prev) => !prev)
-  }
-
   const storiesGenre = (story) => {
     const genre = genres.find((genre) => genre.id === story.genre_id);
     if (genre) {
@@ -187,30 +178,10 @@ const Homepage = () => {
       )
     }
   }
+
   return (
     <div className={styles.main}>
-      <div className={styles.topBannerGrid}>
-        <div></div>
-        <div className={styles.logoAndNav}>
-          <h4>MAD LIT</h4>
-          <div className={styles.buttonNavs}>
-            <div>
-              <button onClick={() => navigate('/Info')}>I</button>
-              <button onClick={settingsDropDown}>S</button>
-            </div>
-            {showSettings ? (
-              <div className={styles.settingsNavContainer}>
-                <p>current theme : {theme}</p>
-                <button onClick={toggleTheme}>toggle light mode dark mode</button>
-                <button>Share</button>
-                <button>Contact</button>
-              </div>
-            ) : <></>}
-          </div>
-        </div>
-        <div></div>
-
-      </div>
+      <TopBarNav/>
       <div className={styles.outerGrid}>
         <div></div>
         <div className={styles.mainGrid} ref={mainGridRef}>
@@ -241,6 +212,7 @@ const Homepage = () => {
               </button>
             </div>
           </div>
+
           {/*Selected Genres*/}
           <div>
             {selectedGenres
@@ -305,7 +277,7 @@ const Homepage = () => {
         </div>
         <div></div>
       </div>
-      <div className={styles.bottomBanner}></div>
+      <BottomBanner/>
     </div>
   )
 }

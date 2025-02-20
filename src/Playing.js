@@ -2,6 +2,8 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate } from 'react-router-dom';
 import { useBlocker } from 'react-router-dom'
 import { PartsOfSpeech } from "./Info";
+import { TopBarNav } from "./MadlitBars";
+import { BottomBanner } from "./MadlitBars";
 import styles from "./Playing.module.css"
 
 const Playing = () => {
@@ -116,6 +118,7 @@ const Playing = () => {
 
   return (
     <div className={styles.main}>
+      <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
 
@@ -134,11 +137,11 @@ const Playing = () => {
               {story.parts_of_speech.map((part, index) => (
                 <div key={index} className={styles.inputWrapper}>
                   <div className={styles.posInfo}>
-                  <p>{part}</p>
-                  <button onClick={() => helpButton(part, index)} type="button">
+                    <p>{part}</p>
+                    <button onClick={() => helpButton(part, index)} type="button">
                       info
                     </button>
-                    </div>
+                  </div>
                   <div className={styles.inputItemsContainer}>
                     <input
                       type="text"
@@ -146,7 +149,7 @@ const Playing = () => {
                       onChange={(e) => handleChange(index, e)}
                       className={(!inputs[index] && errorButton) ? errorStyle : styles.inputsComplete}
                     />
-                    
+
                   </div>
                   {rightIndex === index ?
                     <div>
@@ -173,6 +176,7 @@ const Playing = () => {
         <div></div>
 
       </div>
+      <BottomBanner />
     </div>
   )
 }
