@@ -1,5 +1,6 @@
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import './App.css';
+import "@flaticon/flaticon-uicons/css/all/all.css";
 import { ThemeProvider } from "./ThemeContext";
 
 import Homepage from './Homepage';

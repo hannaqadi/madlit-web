@@ -87,7 +87,7 @@ button {
   background-color: #E2DFEE;
 }
 
-.searchBar button {
+.searchBar i {
   position: absolute;
   right: 5px;
   top: 50%;

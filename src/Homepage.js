@@ -181,7 +181,7 @@ const Homepage = () => {
 
   return (
     <div className={styles.main}>
-      <TopBarNav/>
+      <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
         <div className={styles.mainGrid} ref={mainGridRef}>
@@ -201,7 +201,8 @@ const Homepage = () => {
                 value={search}
                 onChange={handleInputChange}
               />
-              <button type="submit">S</button>
+              <i className="fi fi-rr-search"></i>
+
             </form>
 
             <div className={styles.genreSelectContainer}>
@@ -277,7 +278,7 @@ const Homepage = () => {
         </div>
         <div></div>
       </div>
-      <BottomBanner/>
+      <BottomBanner />
     </div>
   )
 }

@@ -1,4 +1,4 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useTheme } from "./ThemeContext";
 import styles from './MadlitBars.module.css'
@@ -24,7 +24,7 @@ export const TopBarNav = () =>{
       <div className={styles.buttonNavs}>
         <div>
           <button onClick={() => navigate('/Info')}>I</button>
-          <button onClick={settingsDropDown}>S</button>
+          <i onClick={settingsDropDown} className="fi fi-sr-settings"></i>
         </div>
         {showSettings ? (
           <div className={styles.settingsNavContainer}>
