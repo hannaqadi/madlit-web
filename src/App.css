@@ -20,3 +20,15 @@ body {
   color: var(--text-color);
 }
 
+/*------------------Flaticons remove default styling------------------------------*/
+.fi {
+  display: inline-block;
+  font-size: 0; 
+  line-height: 0;
+}
+
+.fi::before {
+  display: inline-block;
+  font-size: inherit;
+  line-height: 0;
+}
