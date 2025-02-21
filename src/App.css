@@ -10,7 +10,7 @@
   --text-color: black;
 }
 
-[data-theme="dark"] {
+[data-theme="Dark"] {
   --background-color: black;
   --text-color: white;
 }
@@ -23,7 +23,7 @@ body {
 /*------------------Flaticons remove default styling------------------------------*/
 .fi {
   display: inline-block;
-  font-size: 0; 
+  font-size: 15px; 
   line-height: 0;
 }
 

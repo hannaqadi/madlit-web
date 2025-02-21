@@ -26,19 +26,25 @@ export const TopBarNav = () => {
             <div className={styles.buttons}>
               <i onClick={() => navigate('/Info')} className="fi fi-rr-info"></i>
             </div>
-            <div className={showSettings ? styles.settingsClicked : styles.buttons}>
-              <i onClick={settingsDropDown} className="fi fi-sr-settings"></i>
+            <div onClick={settingsDropDown} className={showSettings ? styles.settingsClicked : styles.buttons}>
+              <i className="fi fi-sr-settings"></i>
             </div>
           </div>
           {showSettings ? (
             <div className={styles.settingsContainer}>
+              <div className={styles.themeContainer}>
               <p>{theme} Mode</p>
-              {console.log(theme)}
               <label className={styles.switch}>
                 <input type="checkbox" />
                 <span onClick={toggleTheme} className={styles.slider}></span>
               </label>
-              <button>Share</button>
+              </div>
+              <button className={styles.shareContainer}>
+                Share
+                <div className={styles.shareIcon}>
+                  <i className="fi fi-rr-share-square"></i>
+                </div>
+              </button>
               <button>Contact</button>
             </div>
           ) : <></>}

@@ -56,13 +56,13 @@
   font-size: 25px;
 }
 
-.settingsClicked{
+.settingsClicked {
   display: flex;
   justify-content: center;
   align-items: center;
   border-style: none;
   border-radius: 7px 7px 0 7px;
-  background-color:#F9F8FF;
+  background-color: #F9F8FF;
   color: #5440D5;
   height: 43px;
   width: 42px;
@@ -75,6 +75,7 @@
   font-size: 25px;
 }
 
+/*----------------------------------------Settings Dropdown---------------------------*/
 .settingsContainer {
   display: flex;
   flex-direction: column;
@@ -84,6 +85,13 @@
   background-color: #F9F8FF;
   border-style: none;
   border-radius: 7px 0 7px 7px;
+  box-shadow: -5px 5px 7px rgba(0, 0, 0, 0.3);
+}
+
+.themeContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .settingsContainer button {
@@ -96,8 +104,25 @@
   color: #B6A4FF;
 }
 
+.shareContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
 
-/* The switch - the box around the slider */
+.shareIcon {
+  position: absolute;
+  left: 100px;
+}
+
+.shareIcon i {
+  font-size: 16px;
+}
+
+
+/*---------------------------------------Toggle Switch------------------------------- */
+/*Box around the slider*/
 .switch {
   position: relative;
   display: inline-block;
@@ -140,17 +165,17 @@
 
 }
 
-input:checked + .slider {
+input:checked+.slider {
   background-color: #2196F3;
 
 }
 
-input:focus + .slider {
+input:focus+.slider {
   box-shadow: 0 0 1px #2196F3;
-  
+
 }
 
-input:checked + .slider:before {
+input:checked+.slider:before {
   -webkit-transform: translateX(26px);
   -ms-transform: translateX(26px);
   transform: translateX(26px);
@@ -164,6 +189,7 @@ input:checked + .slider:before {
 .slider.round:before {
   border-radius: 50%;
 }
+
 /*----------------------------------------------Bottom Banner-------------------------*/
 
 .bottomBanner {
