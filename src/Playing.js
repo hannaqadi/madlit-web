@@ -115,7 +115,7 @@ const Playing = () => {
     }
   }
 
-
+{/*TODO: Make middle column scrollable globally */}
   return (
     <div className={styles.main}>
       <TopBarNav />
@@ -130,7 +130,7 @@ const Playing = () => {
             <p>Enter in the parts of speech</p>
           </div>
 
-          <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' />
+          {/* <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' /> */}
 
           <form className={styles.inputsForm}>
             <div className={styles.inputsContainer}>
@@ -138,9 +138,7 @@ const Playing = () => {
                 <div key={index} className={styles.inputWrapper}>
                   <div className={styles.posInfo}>
                     <p>{part}</p>
-                    <button onClick={() => helpButton(part, index)} type="button">
-                      info
-                    </button>
+                      <i onClick={() => helpButton(part, index)} class="fi fi-sr-interrogation"></i>
                   </div>
                   <div className={styles.inputItemsContainer}>
                     <input

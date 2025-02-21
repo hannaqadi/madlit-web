@@ -10,23 +10,31 @@
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   overflow: hidden;
-  height:100%;
+  height: 100%;
 }
 
 .mainGrid {
   display: grid;
-  grid-template-rows: auto auto;
+  grid-template-rows: min-content auto;
 }
 
 .storyInfo {
-  display: flex;
-  flex-direction: column;
+  margin: 0;
+}
+
+.storyInfo h3 {
+  margin: 0;
+  padding: 0;
+}
+
+.storyInfo p {
+  margin: 0;
+  padding: 0;
 }
 
 /*----------------------------------------Inputs------------------------------------ */
 .inputsForm {
   font-size: 20px;
-  margin: 1px;
 }
 
 .inputsContainer {
@@ -40,6 +48,8 @@
   width: 100%;
 }
 
+/*--Above inputs--*/
+
 .posInfo {
   display: flex;
   justify-content: space-between;
@@ -48,6 +58,13 @@
 .posInfo p {
   margin: 0;
   padding: 0;
+}
+
+.posInfo i {
+  align-self: center;
+  font-size: 15px;
+  color: #867DBA;
+  cursor: pointer;
 }
 
 .inputItemsContainer {
