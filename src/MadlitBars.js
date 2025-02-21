@@ -23,8 +23,8 @@ export const TopBarNav = () => {
         <h4>MAD LIT</h4>
         <div className={styles.buttonContainer}>
           <div className={styles.buttonNav}>
-            <div className={styles.buttons}>
-              <i onClick={() => navigate('/Info')} className="fi fi-rr-info"></i>
+            <div onClick={() => navigate('/Info')} className={styles.buttons}>
+              <i className="fi fi-rr-info"></i>
             </div>
             <div onClick={settingsDropDown} className={showSettings ? styles.settingsClicked : styles.buttons}>
               <i className="fi fi-sr-settings"></i>

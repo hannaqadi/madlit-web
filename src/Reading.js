@@ -1,5 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate, useLocation } from 'react-router-dom';
+import { TopBarNav } from "./MadlitBars";
+import { BottomBanner } from "./MadlitBars";
 import styles from './Reading.module.css';
 
 const Reading = () => {
@@ -65,6 +67,7 @@ const Reading = () => {
 
   return (
     <div className={styles.main}>
+      <TopBarNav/>
       <div className={styles.outerGrid}>
         <div></div>
         {!isLoaded && !!!localStorage.getItem('finalStory') ? (
@@ -81,14 +84,16 @@ const Reading = () => {
                 .join(' ')}
             </p>
             <div className={styles.buttonContainer}>
-              <button onClick={handlePlayAgain} >Play again</button>
+              <button onClick={handlePlayAgain} >Play again!</button>
               <button onClick={() => navigate('/')}>Back to Stories</button>
+              <button className={styles.shareIcon}>Share   <i className="fi fi-rr-share-square"></i></button>
             </div>
           </div>
         )
         }
         <div></div>
       </div>
+      <BottomBanner/>
     </div>
   )
 }
