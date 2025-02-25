@@ -131,12 +131,12 @@ const Homepage = () => {
     localStorage.setItem('story', JSON.stringify(story))
     navigate('/Playing')
   }
-  const toggleGenreDropdown = () => {
+  const toggleShowGenres = () => {
     setShowGenres((prev) => !prev);
   };
 
   const handleGenreSelect = (genre) => {
-    toggleGenreDropdown();
+    toggleShowGenres();
     //Set genres state to selected true
     setGenres((prev) => {
       return prev.map((g) => {
@@ -181,6 +181,7 @@ const Homepage = () => {
 
   return (
     <div className={styles.main}>
+      {showGenres? <div className={styles.mainGreyedOut}></div> : <></>}
       <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
@@ -207,7 +208,7 @@ const Homepage = () => {
 
             <div className={styles.genreSelectContainer}>
               <button
-                onClick={() => toggleGenreDropdown()}
+                onClick={() => toggleShowGenres()}
                 className={styles.genreButton}>
                 Genres
               </button>
@@ -227,24 +228,30 @@ const Homepage = () => {
               ))}
           </div>
           {/*Genre List*/}
-          <div className={styles.genreList}>
-            {showGenres ? (
+          {showGenres ? (
+            <div className={styles.genreList}>
               <ul>
+                <h2>Genres</h2>
+                <button onClick={()=>toggleShowGenres()}>X</button>
                 {genres.map((genre, index) => {
+                  const colors = [' #FFAFE2', '#FAC87F','#3DD8ED', '#73E3B1' ];
                   if (genre.selected === false) {
                     return (
                       <li
                         key={index}
                         onClick={() => handleGenreSelect(genre)}
                       >
-                        {genre.name}
+                        <div style={{ backgroundColor: colors[index % 4] }}></div>
+                        <p>{genre.name}</p>
+                        <input type="checkbox" />
                       </li>
                     )
                   }
                 })}
               </ul>
-            ) : null}
-          </div>
+            </div>
+          ) : null}
+
           {/*Story cards*/}
           <div className={styles.storyCardContainer}>
             {stories.length > 0 ? (

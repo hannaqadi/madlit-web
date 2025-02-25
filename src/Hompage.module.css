@@ -1,4 +1,4 @@
-body{
+body {
   font-family: "K2D", serif;
 }
 
@@ -9,6 +9,7 @@ input::placeholder {
 button {
   font-family: "K2D", serif;
 }
+
 .main {
   display: flex;
   flex-direction: column;
@@ -18,12 +19,21 @@ button {
   flex-grow: 0;
   flex-shrink: 0;
 }
+
+.mainGreyedOut {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 2;
+}
+
 /*-----------------------------------------------Central Grids-----------------------------------*/
 .outerGrid {
   display: grid;
   grid-template-columns: 1fr 2fr 1fr;
   overflow: hidden;
-  height:100%;
+  height: 100%;
 }
 
 .mainGrid {
@@ -65,7 +75,6 @@ button {
 /*-----------------------------------Search Bar--------------------------------------*/
 .searchContainer {
   display: flex;
-  justify-content: space-between;
   width: 100%;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -83,6 +92,7 @@ button {
   border-radius: 7px;
   border-style: none;
   font-size: 12px;
+  height: 30px;
   width: 100%;
   background-color: #E2DFEE;
 }
@@ -118,7 +128,7 @@ button {
   border-radius: 7px;
   background-color: #FDFCFF;
   cursor: pointer;
-  height: 30px;
+  height: 45px;
 }
 
 .selectedGenre {
@@ -131,25 +141,58 @@ button {
 }
 
 .genreList {
-  margin-bottom: 10px;
-  margin-top: 10px;
+  justify-self: center;
+  align-self: center;
+  position: absolute;
+  background-color: #FDFCFF;
+  border-style: none;
+  border-radius: 7px;
+  height: 90%; /*TODO Make height auto?? */
+  width: 17%;
+  padding-right: 20px;
+  padding-left: 20px;
+  z-index: 3;
+}
+
+.genreList h2 {
+  justify-self: center;
 }
 
 .genreList ul {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
   list-style: none;
   padding: 0;
   margin: 0;
 }
 
 .genreList li {
-  padding: 3px 12px;
-  border-radius: 20px;
-  border: 1px solid #ccc;
-  background-color: #f0f0f0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   cursor: pointer;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.genreList div {
+  align-self: center;
+  border-style: none;
+  border-radius: 50%;
+  height: 30px;
+  width: 30px;
+  background-color: cornflowerblue;
+}
+
+.genreList p {
+  margin-right: auto;
+  margin-left: 20px;
+  margin-top: 0;
+  margin-bottom: 0px;
+  padding: 0;
+}
+
+.genreList input {
+  height: 25px;
+  width: 25px;
 }
 
 
@@ -165,9 +208,10 @@ button {
   display: flex;
   flex-direction: column;
   flex-grow: 0;
-  flex-shrink: 0; 
-  width: auto; 
-  max-width: 100%; /* Prevents overflow issues */
+  flex-shrink: 0;
+  width: auto;
+  max-width: 100%;
+  /* Prevents overflow issues */
   border-style: none;
   border-radius: 7px;
   cursor: pointer;
@@ -190,6 +234,6 @@ button {
   margin: 0;
   padding-left: 20px;
   padding-right: 10px;
-  padding-top:0;
+  padding-top: 0;
   padding-bottom: 0;
 }
