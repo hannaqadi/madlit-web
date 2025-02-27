@@ -1,0 +1,41 @@
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  flex-grow: 0;
+  flex-shrink: 0;
+}
+
+.outerGrid {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  overflow: hidden;
+  height: 100%;
+}
+
+.mainGrid{
+  color: #0C185C;
+  display:grid;
+  grid-template-columns: 100px 1fr;
+  grid-template-rows: auto auto auto auto;
+}
+
+.columnFlex{
+  display: flex;
+  flex-direction: column;
+}
+.sideBannerContainer{
+overflow: hidden;
+}
+.sideBanner{
+  
+  position:absolute;
+  top:200px;
+  width:500px;
+  background-color: #B6A4FF;
+  color: #5440D5;
+  transform: rotatez(20deg);
+}
