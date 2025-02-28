@@ -174,7 +174,7 @@ const Homepage = () => {
     const genre = genres.find((genre) => genre.id === story.genre_id);
     if (genre) {
       return (
-        <h5> Genre: {genre.name}</h5>
+        <h5>[ {genre.name} ]</h5>
       )
     }
   }
@@ -217,6 +217,7 @@ const Homepage = () => {
 
           {/*Selected Genres*/}
           <div>
+            STORIES
             {selectedGenres
               .map((genre) => (
                 <span
@@ -265,8 +266,8 @@ const Homepage = () => {
                     className={styles.storyCard}
                   >
                     <h3>{story.title}</h3>
-                    {storiesGenre(story)}
                     <p>{story.story}</p>
+                    {storiesGenre(story)}
                   </div>
                 )
               })

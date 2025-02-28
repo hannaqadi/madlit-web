@@ -11,6 +11,7 @@ button {
 }
 
 .main {
+  color: #0C185C;
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -38,7 +39,7 @@ button {
 
 .mainGrid {
   display: grid;
-  grid-template-rows: 8vh auto auto auto auto;
+  grid-template-rows: 15vh 10vh auto;
   overflow-y: auto;
   overflow-x: hidden;
   scrollbar-width: none;
@@ -53,28 +54,30 @@ button {
 .header {
   display: flex;
   flex-direction: column;
+  justify-content: center;
   align-items: center;
-  margin-top: 15px;
 }
 
 .header h1 {
   margin: 0;
   padding: 0;
-  font-weight: normal;
-  font-size: medium;
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
 }
-
 
 .header h2 {
   margin: 0;
   padding: 0;
-  font-weight: normal;
-  font-size: medium;
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 /*-----------------------------------Search Bar--------------------------------------*/
 .searchContainer {
   display: flex;
+  align-self: flex-start;
   width: 100%;
   margin-top: 20px;
   margin-bottom: 10px;
@@ -84,51 +87,58 @@ button {
   position: relative;
   display: flex;
   align-items: center;
-  width: 90%;
+  width: 100%;
 }
 
 .searchBar input {
-  padding: 10px;
+  color: rgba(12, 24, 92, 0.41);
+  font-family: "K2D", sans-serif;
+  font-size: 20px;
+  padding-left: 50px;
   border-radius: 7px;
   border-style: none;
-  font-size: 12px;
-  height: 30px;
+  height: 59px;
   width: 100%;
   background-color: #E2DFEE;
 }
 
 .searchBar i {
+  color: #7479A3;
   position: absolute;
   right: 5px;
   top: 50%;
   transform: translateY(-50%);
   border: none;
-  background-color: #ccc;
   padding: 8px 12px;
   border-radius: 50%;
   cursor: pointer;
+  font-size: 25px;
 }
 
 /*------------------------------------Genre Select-------------------------------------*/
-.genreContainer {
-  margin-left: 10px;
-}
 
 .genreSelectContainer {
   display: flex;
-  flex-wrap: wrap;
   margin-left: 10px;
   align-items: center;
 }
 
 .genreButton {
+  font-size: 16px;
+  text-align: left;
+  /* TODO: Add icon then remove text align possibly */
   border: solid;
   border-width: 1px;
-  border-color: #464F83;
+  border-color: rgba(70, 79, 131, 1);
   border-radius: 7px;
   background-color: #FDFCFF;
   cursor: pointer;
   height: 45px;
+  width: 110px;
+}
+
+.genreContainer {
+  margin-left: 10px;
 }
 
 .selectedGenre {
@@ -147,7 +157,8 @@ button {
   background-color: #FDFCFF;
   border-style: none;
   border-radius: 7px;
-  height: 90%; /*TODO Make height auto?? */
+  height: 90%;
+  /*TODO Make height auto?? */
   width: 17%;
   padding-right: 20px;
   padding-left: 20px;
@@ -200,7 +211,7 @@ button {
 .storyCardContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 10px;
 }
 
@@ -209,6 +220,8 @@ button {
   flex-direction: column;
   flex-grow: 0;
   flex-shrink: 0;
+  align-items: center;
+  height: 131px;
   width: auto;
   max-width: 100%;
   /* Prevents overflow issues */
@@ -232,8 +245,6 @@ button {
 
 .storyCard p {
   margin: 0;
-  padding-left: 20px;
-  padding-right: 10px;
   padding-top: 0;
   padding-bottom: 0;
 }
