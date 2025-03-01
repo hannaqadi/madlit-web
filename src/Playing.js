@@ -73,7 +73,6 @@ const Playing = () => {
   }
 
   const handleSubmit = (event) => {
-    console.log('SIBTIT')
     if (filled === true) {
       event.preventDefault();
       isSubmittingRef.current = true;
@@ -92,7 +91,6 @@ const Playing = () => {
     } else {
       event.preventDefault();
       setErrorButton(true)
-      console.log('it aint filled')
     }
   }
 
@@ -115,7 +113,7 @@ const Playing = () => {
     }
   }
 
-{/*TODO: Make middle column scrollable globally */}
+  {/*TODO: Make middle column scrollable globally */ }
   return (
     <div className={styles.main}>
       <TopBarNav />
@@ -126,8 +124,6 @@ const Playing = () => {
 
           <div className={styles.storyInfo}>
             <h3>{story.title}</h3>
-            <p>{story.story}</p>
-            <p>Enter in the parts of speech</p>
           </div>
 
           {/* <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' /> */}
@@ -138,7 +134,7 @@ const Playing = () => {
                 <div key={index} className={styles.inputWrapper}>
                   <div className={styles.posInfo}>
                     <p>{part}</p>
-                      <i onClick={() => helpButton(part, index)} class="fi fi-sr-interrogation"></i>
+                    <i onClick={() => helpButton(part, index)} class="fi fi-sr-interrogation"></i>
                   </div>
                   <div className={styles.inputItemsContainer}>
                     <input
@@ -150,8 +146,11 @@ const Playing = () => {
 
                   </div>
                   {rightIndex === index ?
-                    <div>
+                    <div className={styles.helpContentContainer}>
+                      <i class="fi fi-br-cross-small"></i>
+                      <h1>{part} -</h1>
                       <p>{helpContent}</p>
+                      <h2>Example</h2>
                     </div>
                     : <></>
                   }
@@ -171,7 +170,11 @@ const Playing = () => {
 
         </div>
           : <p>oops!</p>}
-        <div></div>
+        <div className={styles.genreBannerContainer}>
+          {/* <div className={styles.genreBanner}>{story.title}</div> */}
+          <div className={styles.genreBanner}>tesdsdfsr</div>
+
+        </div>
 
       </div>
       <BottomBanner />

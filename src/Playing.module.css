@@ -6,25 +6,41 @@
   overflow: hidden;
 }
 
+.mainGreyedOut {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  position: absolute;
+  z-index: 2;
+}
+
 .outerGrid {
   display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-columns: 1fr 1.7fr 1fr;
   overflow: hidden;
   height: 100%;
 }
 
 .mainGrid {
   display: grid;
-  grid-template-rows: min-content auto;
+  grid-template-rows: 100px auto;
 }
 
 .storyInfo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   margin: 0;
 }
 
 .storyInfo h3 {
   margin: 0;
   padding: 0;
+  color: rgba(12, 24, 92, 1);
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-size: 40px;
 }
 
 .storyInfo p {
@@ -45,6 +61,7 @@
 }
 
 .inputWrapper {
+  margin-top: 10px;
   width: 100%;
 }
 
@@ -58,6 +75,7 @@
 .posInfo p {
   margin: 0;
   padding: 0;
+  color: rgba(12, 24, 92, 1);
 }
 
 .posInfo i {
@@ -106,21 +124,59 @@
   outline: none;
 }
 
+.helpContentContainer {
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FDFCFF;
+  color: rgba(12, 24, 92, 1);
+  border-style: none;
+  border-radius: 7px;
+  height: 300px;
+  /*TODO Make height auto?? */
+  width: 17%;
+  padding-right: 20px;
+  padding-left: 20px;
+  z-index: 3;
+}
+
+.helpContentContainer i {
+  display:flex;
+  flex-direction: row-reverse;
+  font-size: 25px;
+  margin-top: 10px;
+}
+
+.helpContentContainer h1 {
+  font-size: 24px;
+  font-weight: 800;
+}
+
+.helpContentContainer h2 {
+  font-size: 20px;
+  font-weight: 800;
+}
+
 .finishedButtonContainer {
+  margin-top: 20px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
 
 .finishedButtonEnabled {
-  background-color: #0C185C;
-  color: #B6A4FF;
   margin-left: 5px;
   height: 64px;
   width: 90%;
   border-style: none;
   border-radius: 7px;
   cursor: pointer;
+  background-color: #0C185C;
+  color: #B6A4FF;
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
 }
 
 .finishedButtonDisabled {
@@ -130,4 +186,25 @@
   border-style: none;
   border-radius: 7px;
   cursor: pointer;
+  background-color: rgba(204, 202, 202, 1);
+  color: rgba(115, 115, 115, 1);
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+}
+
+/*-----------------------------------------------------Genre Banner-------------------*/
+
+.genreBannerContainer {
+  position: relative;
+}
+
+.genreBanner {
+  position: absolute;
+  left: 50px;
+  height: 108px;
+  width: 120px;
+  background-color: rgba(117, 228, 179, 1);
+  color: rgba(0, 71, 81, 0.75);
+  clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 70%, 0% 100%);
 }
