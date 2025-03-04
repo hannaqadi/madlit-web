@@ -113,6 +113,13 @@ const Playing = () => {
     }
   }
 
+  const genreBanner = () => {
+    const genre = JSON.parse(localStorage.getItem('genre')) 
+    return (
+      <p>{genre}</p>
+    )
+  }
+
   {/*TODO: Make middle column scrollable globally */ }
   return (
     <div className={styles.main}>
@@ -171,9 +178,7 @@ const Playing = () => {
         </div>
           : <p>oops!</p>}
         <div className={styles.genreBannerContainer}>
-          {/* <div className={styles.genreBanner}>{story.title}</div> */}
-          <div className={styles.genreBanner}>tesdsdfsr</div>
-
+          <div className={styles.genreBanner}>{genreBanner()}</div>
         </div>
 
       </div>

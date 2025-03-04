@@ -10,6 +10,7 @@ const Homepage = () => {
   const [genres, setGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
   const [showGenres, setShowGenres] = useState(false)
+  const [cardGenre, setCardGenre] = useState('')
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1);
@@ -128,8 +129,13 @@ const Homepage = () => {
     if (!!localStorage.getItem('finalStory')) {
       localStorage.removeItem('finalStory')
     }
-    localStorage.setItem('story', JSON.stringify(story))
-    navigate('/Playing')
+    
+    const genre = genres.find((g) => g.id === story.genre_id);
+    if (genre) {
+      localStorage.setItem('story', JSON.stringify(story));
+      localStorage.setItem('genre', JSON.stringify(genre.name));
+      navigate('/Playing');
+    }
   }
   const toggleShowGenres = () => {
     setShowGenres((prev) => !prev);
