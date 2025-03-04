@@ -136,7 +136,7 @@ const Homepage = () => {
   };
 
   const handleGenreSelect = (genre) => {
-    toggleShowGenres();
+    setShowGenres(true)
     //Set genres state to selected true
     setGenres((prev) => {
       return prev.map((g) => {
@@ -145,11 +145,11 @@ const Homepage = () => {
           : g
       })
     });
-
+    console.log('genres', genres)
     setSelectedGenres((prevGenres) =>
       [...prevGenres, genre]
     );
-
+    console.log('selectedgenres', selectedGenres)
     setStories([]);
     setPage(1);
   };
@@ -181,7 +181,7 @@ const Homepage = () => {
 
   return (
     <div className={styles.main}>
-      {showGenres? <div className={styles.mainGreyedOut}></div> : <></>}
+      {showGenres ? <div className={styles.mainGreyedOut}></div> : <></>}
       <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
@@ -217,26 +217,30 @@ const Homepage = () => {
 
           {/*Selected Genres*/}
           <div>
-            STORIES
+            Stories
             {selectedGenres
               .map((genre) => (
                 <span
                   key={genre.id}
                   onClick={() => removeAddedGenres(genre)}
                   className={styles.selectedGenre}>
-                  {genre.name}
+                  <p> {genre.name} </p>
+                  <i class="fi fi-br-cross-small"></i>
                 </span>
               ))}
           </div>
           {/*Genre List*/}
           {showGenres ? (
-            <div className={styles.genreList}>
-              <ul>
+            <div className={styles.genreContainer}>
+              <div className={styles.genreTitle}>
+                <div></div>
                 <h2>Genres</h2>
-                <button onClick={()=>toggleShowGenres()}>X</button>
-                {genres.map((genre, index) => {
-                  const colors = [' #FFAFE2', '#FAC87F','#3DD8ED', '#73E3B1' ];
-                  if (genre.selected === false) {
+                <i onClick={() => toggleShowGenres()} class="fi fi-br-cross-small"></i>
+              </div>
+              <div className={styles.genreList}>
+                <ul>
+                  {genres.map((genre, index) => {
+                    const colors = [' #FFAFE2', '#FAC87F', '#3DD8ED', '#73E3B1'];
                     return (
                       <li
                         key={index}
@@ -244,12 +248,16 @@ const Homepage = () => {
                       >
                         <div style={{ backgroundColor: colors[index % 4] }}></div>
                         <p>{genre.name}</p>
-                        <input type="checkbox" />
+                        {genre.selected === true ?
+                          <input type="checkbox" checked />
+                          : <input type="checkbox" />
+                        }
                       </li>
                     )
-                  }
-                })}
-              </ul>
+                  })}
+                </ul>
+                <button>Update genres</button>
+              </div>
             </div>
           ) : null}
 

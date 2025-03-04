@@ -142,15 +142,39 @@ button {
 }
 
 .selectedGenre {
-  border-radius: 5px;
-  background-color: #B7DDC4;
-  padding: 0px 8px;
+  display: flex;
+  flex-direction: row;
+  width: min-content;
+  align-items: center;
+  justify-content: space-evenly;
+  font-family: "K2D", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  background-color: #F5F3FF;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 7px;
+  border-color: #BDC1E7;
+  padding: 3px 15px;
   margin-top: 5px;
   margin-left: 5px;
   cursor: pointer;
 }
 
-.genreList {
+.selectedGenre p {
+  padding: 0;
+  margin: 0
+}
+
+.selectedGenre i {
+  color: #7479A3;
+  font-size: 15px;
+  cursor: pointer;
+  margin-left: 5px;
+  margin-top: 2px;
+}
+
+.genreContainer {
   justify-self: center;
   align-self: center;
   position: absolute;
@@ -163,10 +187,34 @@ button {
   padding-right: 20px;
   padding-left: 20px;
   z-index: 3;
+  overflow: hidden;
+  color: #0C185C;
 }
 
-.genreList h2 {
+.genreTitle {
+  display: grid;
+  grid-template-columns: 1fr 2fr 1fr;
+  height: 100px;
+}
+
+.genreTitle h2 {
+  font-family: "Permanent Marker", sans-serif;
+  font-weight: 400;
+  font-size: 36px;
+  color: #0C185C;
   justify-self: center;
+}
+
+.genreTitle i {
+  justify-self: center;
+  align-self: center;
+  color: #8A8DB2;
+  font-size: 42px;
+  cursor: pointer;
+}
+
+.genreList {
+  height: 100%;
 }
 
 .genreList ul {
@@ -190,10 +238,10 @@ button {
   border-radius: 50%;
   height: 30px;
   width: 30px;
-  background-color: cornflowerblue;
 }
 
 .genreList p {
+  font-size: 24px;
   margin-right: auto;
   margin-left: 20px;
   margin-top: 0;
@@ -204,8 +252,23 @@ button {
 .genreList input {
   height: 25px;
   width: 25px;
+  color: #5440D5;
+  border-radius: 4px;
+
 }
 
+.genreList button {
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
+  border-style: none;
+  border-radius: 7px;
+  background-color: #0C185C;
+  color: #B6A4FF;
+  font-size: 20px;
+  height: 37px;
+  width: 100%;
+  cursor: pointer;
+}
 
 /*---------------------------------------Stories---------------------------------*/
 .storyCardContainer {
