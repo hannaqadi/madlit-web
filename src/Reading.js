@@ -65,9 +65,26 @@ const Reading = () => {
     navigate('/Playing', { state: { story: story } })
   }
 
+  const textDecoration = () => {
+    let other = []
+    return story.story_seq.map((element, index) => {
+      other.push(element)
+      if (element === "") {
+        other.pop();
+        const result = (
+          <>
+            <p>{other.join(' ')}</p>
+            <b key={index}>{finalStory[index]}</b>
+          </>
+        )
+        other = []
+        return result;
+      }
+    });
+  }
   return (
     <div className={styles.main}>
-      <TopBarNav/>
+      <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
         {!isLoaded && !!!localStorage.getItem('finalStory') ? (
@@ -76,13 +93,8 @@ const Reading = () => {
           </div>
         ) : (
           <div className={styles.mainGrid}>
-            <p>Reading</p>
-            <p>
-              {(finalStory.length > 0
-                ? finalStory
-                : JSON.parse(localStorage.getItem('finalStory')) || [])
-                .join(' ')}
-            </p>
+            <p>Title Here</p>
+            <div> {textDecoration()}</div>
             <div className={styles.buttonContainer}>
               <button onClick={handlePlayAgain} >Play again!</button>
               <button onClick={() => navigate('/')}>Back to Stories</button>
@@ -93,7 +105,7 @@ const Reading = () => {
         }
         <div></div>
       </div>
-      <BottomBanner/>
+      <BottomBanner />
     </div>
   )
 }
