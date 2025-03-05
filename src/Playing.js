@@ -18,6 +18,21 @@ const Playing = () => {
   const [rightIndex, setRightIndex] = useState(null)
   const isSubmittingRef = useRef(false);
   const isDirtyRef = useRef(false)
+  const mainGridRef = useRef(null);
+
+  /*Global Scrolling*/
+  useEffect(() => {
+    const handleGlobalScroll = (event) => {
+      if (mainGridRef.current) {
+        mainGridRef.current.scrollTop += event.deltaY;
+        event.preventDefault();
+      }
+    };
+    document.addEventListener('wheel', handleGlobalScroll, { passive: false });
+    return () => {
+      document.removeEventListener('wheel', handleGlobalScroll);
+    };
+  }, []);
 
   useEffect(() => {
     try {
@@ -114,9 +129,16 @@ const Playing = () => {
   }
 
   const genreBanner = () => {
+    /*Places spaces between letters*/
     const genre = JSON.parse(localStorage.getItem('genre')) 
+    const genreArr = genre.split("")
+    let genreFinal = []
+    genreArr.forEach((element) => {
+      genreFinal.push(element)
+      genreFinal.push(" ")
+    });
     return (
-      <p>{genre}</p>
+      <p>{genreFinal}</p>
     )
   }
 
@@ -126,8 +148,7 @@ const Playing = () => {
       <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
-
-        {loaded ? <div className={styles.mainGrid}>
+        {loaded ? <div className={styles.mainGrid} ref={mainGridRef}>
 
           <div className={styles.storyInfo}>
             <h3>{story.title}</h3>
@@ -141,7 +162,7 @@ const Playing = () => {
                 <div key={index} className={styles.inputWrapper}>
                   <div className={styles.posInfo}>
                     <p>{part}</p>
-                    <i onClick={() => helpButton(part, index)} class="fi fi-sr-interrogation"></i>
+                    <i onClick={() => helpButton(part, index)} className="fi fi-sr-interrogation"></i>
                   </div>
                   <div className={styles.inputItemsContainer}>
                     <input
@@ -154,7 +175,7 @@ const Playing = () => {
                   </div>
                   {rightIndex === index ?
                     <div className={styles.helpContentContainer}>
-                      <i class="fi fi-br-cross-small"></i>
+                      <i onClick={()=> helpButton(part, null)}className="fi fi-br-cross-small"></i>
                       <h1>{part} -</h1>
                       <p>{helpContent}</p>
                       <h2>Example</h2>

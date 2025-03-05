@@ -65,15 +65,15 @@
   border-radius: 7px 7px 0 7px;
   background-color: #F9F8FF;
   color: #5440D5;
-  height: 43px;
-  width: 42px;
+  height: 56px;
+  width: 55px;
   margin-left: 15px;
   cursor: pointer;
 }
 
 .settingsClicked i {
   font-style: normal;
-  font-size: 25px;
+  font-size: 30px;
 }
 
 /*----------------------------------------Settings Dropdown---------------------------*/

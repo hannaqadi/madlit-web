@@ -24,6 +24,15 @@
 .mainGrid {
   display: grid;
   grid-template-rows: 100px auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none
+}
+
+
+.mainGrid::-webkit-scrollbar {
+  display: none;
 }
 
 .storyInfo {
@@ -146,6 +155,7 @@
   flex-direction: row-reverse;
   font-size: 25px;
   margin-top: 10px;
+  cursor: pointer;
 }
 
 .helpContentContainer h1 {
@@ -166,7 +176,7 @@
 }
 
 .finishedButtonEnabled {
-  margin-left: 5px;
+  margin-bottom: 20px;
   height: 64px;
   width: 90%;
   border-style: none;
@@ -180,7 +190,7 @@
 }
 
 .finishedButtonDisabled {
-  margin-left: 5px;
+  margin-bottom: 20px;
   height: 64px;
   width: 90%;
   border-style: none;
@@ -200,11 +210,21 @@
 }
 
 .genreBanner {
+  display: flex;
+  justify-content: center;
   position: absolute;
   left: 50px;
   height: 108px;
-  width: 120px;
-  background-color: rgba(117, 228, 179, 1);
+  width: max-content;
+  background-color: #75E4B3;
   color: rgba(0, 71, 81, 0.75);
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 70%, 0% 100%);
+}
+
+.genreBanner p{
+  font-family: "K2D", sans-serif;
+  font-weight: 600;
+  position: relative;
+  top:30px; 
+  margin: 0px 20px;
 }
