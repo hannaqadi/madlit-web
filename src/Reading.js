@@ -7,10 +7,11 @@ import styles from './Reading.module.css';
 const Reading = () => {
   const navigate = useNavigate();
   const location = useLocation();
-  const story = JSON.parse(localStorage.getItem('story'))
   const finalInputs = location.state?.finalInputs
+  const story = JSON.parse(localStorage.getItem('story'))
   const [isLoaded, setIsLoaded] = useState(false)
   const [finalStory, setFinalStory] = useState([])
+  const [storyTitle, setStoryTitle] = useState("")
 
 
   useEffect(() => {
@@ -36,6 +37,7 @@ const Reading = () => {
     }
     const combineText = () => {
       if (story && Array.isArray(story.story_seq)) {
+        setStoryTitle(story.title)
         let tempStory = [...story.story_seq];
         let j = 0;
         for (let i = 0; i < tempStory.length; i++) {
@@ -66,21 +68,24 @@ const Reading = () => {
   }
 
   const textDecoration = () => {
-    let other = []
-    return story.story_seq.map((element, index) => {
-      other.push(element)
+    let parts = [];
+    let currentText = [];
+
+    story.story_seq.forEach((element, index) => {
       if (element === "") {
-        other.pop();
-        const result = (
-          <>
-            <p>{other.join(' ')}</p>
-            <b key={index}>{finalStory[index]}</b>
-          </>
-        )
-        other = []
-        return result;
+        if (currentText.length > 0) {
+          parts.push(<span key={`text-${index}`}>{currentText.join(" ") + " "}</span>);
+          currentText = [];
+        }
+        parts.push(<b key={`bold-${index}`}><u>{finalStory[index]} </u></b>);
+      } else {
+        currentText.push(element);
       }
     });
+    if (currentText.length > 0) {
+      parts.push(<span key="last-text">{currentText.join(" ")}</span>);
+    }
+    return <p>{parts}</p>;
   }
   return (
     <div className={styles.main}>
@@ -93,11 +98,13 @@ const Reading = () => {
           </div>
         ) : (
           <div className={styles.mainGrid}>
-            <p>Title Here</p>
-            <div> {textDecoration()}</div>
+            <p className={styles.title}>{storyTitle}</p>
+            <div className={styles.readingContainer}> {textDecoration()}</div>
             <div className={styles.buttonContainer}>
-              <button onClick={handlePlayAgain} >Play again!</button>
-              <button onClick={() => navigate('/')}>Back to Stories</button>
+              <div className={styles.topButtons}>
+                <button onClick={handlePlayAgain} >Play again!</button>
+                <button onClick={() => navigate('/')}>Back to Stories</button>
+              </div>
               <button className={styles.shareIcon}>Share   <i className="fi fi-rr-share-square"></i></button>
             </div>
           </div>
