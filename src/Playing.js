@@ -113,7 +113,11 @@ const Playing = () => {
     isSubmittingRef.current = false;
     isDirtyRef.current = false;
   }, [])
-
+const capitalizePart = (part) =>{
+  return (
+    <p></p>
+  )
+}
   const helpButton = (part, index) => {
     //TODO FOR BETA: Convert 'part' to all lowercase to match PartsOfSpeech 
     if (rightIndex === index) {
@@ -130,7 +134,7 @@ const Playing = () => {
 
   const genreBanner = () => {
     /*Places spaces between letters*/
-    const genre = JSON.parse(localStorage.getItem('genre')) 
+    const genre = JSON.parse(localStorage.getItem('genre'))
     const genreArr = genre.split("")
     let genreFinal = []
     genreArr.forEach((element) => {
@@ -145,6 +149,7 @@ const Playing = () => {
   {/*TODO: Make middle column scrollable globally */ }
   return (
     <div className={styles.main}>
+      {rightIndex !== null ? <div className={styles.mainGreyedOut}></div> : <></>}
       <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
@@ -161,7 +166,7 @@ const Playing = () => {
               {story.parts_of_speech.map((part, index) => (
                 <div key={index} className={styles.inputWrapper}>
                   <div className={styles.posInfo}>
-                    <p>{part}</p>
+                    <p>{part.toUpperCase()}</p>
                     <i onClick={() => helpButton(part, index)} className="fi fi-sr-interrogation"></i>
                   </div>
                   <div className={styles.inputItemsContainer}>
@@ -175,10 +180,9 @@ const Playing = () => {
                   </div>
                   {rightIndex === index ?
                     <div className={styles.helpContentContainer}>
-                      <i onClick={()=> helpButton(part, null)}className="fi fi-br-cross-small"></i>
-                      <h1>{part} -</h1>
+                      <i onClick={() => setRightIndex(null)} className="fi fi-br-cross-small"></i>
+                      <h1><u>{part}</u> -</h1>
                       <p>{helpContent}</p>
-                      <h2>Example</h2>
                     </div>
                     : <></>
                   }

@@ -70,7 +70,7 @@
 }
 
 .inputWrapper {
-  margin-top: 10px;
+  margin-bottom: 40px;
   width: 100%;
 }
 
@@ -84,7 +84,9 @@
 .posInfo p {
   margin: 0;
   padding: 0;
-  color: rgba(12, 24, 92, 1);
+  color:#0C185C;
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
 }
 
 .posInfo i {
@@ -134,6 +136,8 @@
 }
 
 .helpContentContainer {
+  display: grid;
+  grid-template-rows: max-content 1fr 1fr;
   position: absolute;
   top: 40%;
   left: 50%;
@@ -142,30 +146,31 @@
   color: rgba(12, 24, 92, 1);
   border-style: none;
   border-radius: 7px;
-  height: 300px;
-  /*TODO Make height auto?? */
+  height: max-content;
   width: 17%;
-  padding-right: 20px;
-  padding-left: 20px;
   z-index: 3;
 }
 
 .helpContentContainer i {
-  display:flex;
-  flex-direction: row-reverse;
+  justify-self: flex-end;
+  align-self: flex-end;
+  margin-top: 5px;
+  margin-right: 5px;
   font-size: 25px;
-  margin-top: 10px;
   cursor: pointer;
 }
 
 .helpContentContainer h1 {
   font-size: 24px;
   font-weight: 800;
+  padding: 0px 20px;
+  margin-bottom: 0px;
 }
 
-.helpContentContainer h2 {
-  font-size: 20px;
-  font-weight: 800;
+.helpContentContainer p{
+  margin-top: 0px;
+  margin-bottom: 30px;
+  padding: 0px 20px;
 }
 
 .finishedButtonContainer {
@@ -221,10 +226,10 @@
   clip-path: polygon(0% 0%, 100% 0%, 100% 100%, 50% 70%, 0% 100%);
 }
 
-.genreBanner p{
+.genreBanner p {
   font-family: "K2D", sans-serif;
   font-weight: 600;
   position: relative;
-  top:30px; 
+  top: 30px;
   margin: 0px 20px;
 }
