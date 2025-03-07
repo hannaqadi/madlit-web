@@ -113,13 +113,8 @@ const Playing = () => {
     isSubmittingRef.current = false;
     isDirtyRef.current = false;
   }, [])
-const capitalizePart = (part) =>{
-  return (
-    <p></p>
-  )
-}
+
   const helpButton = (part, index) => {
-    //TODO FOR BETA: Convert 'part' to all lowercase to match PartsOfSpeech 
     if (rightIndex === index) {
       setRightIndex(null)
     } else {
@@ -127,6 +122,9 @@ const capitalizePart = (part) =>{
         if (property === part) {
           setHelpContent(PartsOfSpeech[property])
           setRightIndex(index)
+        }
+        else {
+          setHelpContent(null)
         }
       }
     }
@@ -167,7 +165,9 @@ const capitalizePart = (part) =>{
                 <div key={index} className={styles.inputWrapper}>
                   <div className={styles.posInfo}>
                     <p>{part.toUpperCase()}</p>
-                    <i onClick={() => helpButton(part, index)} className="fi fi-sr-interrogation"></i>
+                    {PartsOfSpeech[part] ? <i onClick={() => helpButton(part, index)} className="fi fi-sr-interrogation"></i>
+                      : <></>
+                    }
                   </div>
                   <div className={styles.inputItemsContainer}>
                     <input
