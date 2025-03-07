@@ -14,12 +14,13 @@ const Playing = () => {
   const [errorStyle] = useState(styles.inputsError)
   const [errorButton, setErrorButton] = useState(false)
   const [loaded, setLoaded] = useState(false)
+  const [showModal, setShowModal] = useState(false);
   const [helpContent, setHelpContent] = useState('')
   const [rightIndex, setRightIndex] = useState(null)
   const isSubmittingRef = useRef(false);
   const isDirtyRef = useRef(false)
   const mainGridRef = useRef(null);
-
+  const pendingNavigation = useRef(null);
   /*Global Scrolling*/
   useEffect(() => {
     const handleGlobalScroll = (event) => {
@@ -76,16 +77,26 @@ const Playing = () => {
     isDirtyRef.current = true;
   }
 
-  const Prompt = ({ when, message }) => {
-    useBlocker(() => {
-      if (when && !isSubmittingRef.current) {
-        return !window.confirm(message)
-      }
-      return false
-    }, [when, isSubmittingRef.current])
+  // Blocking navigation
+  useBlocker((tx) => {
+    if (pendingNavigation.current) return false;
+    setShowModal(true);
+    pendingNavigation.current = tx;
+    return true;
+  });
 
-    return <div key={when} />
+  const handleConfirm = () => {
+    setShowModal(false);
+    if (pendingNavigation.current) {
+      navigate("/");
+      pendingNavigation.current = null;
+    };
   }
+  const handleCancel = () => {
+    setShowModal(false);
+    pendingNavigation.current = null;
+  };
+
 
   const handleSubmit = (event) => {
     if (filled === true) {
@@ -123,9 +134,6 @@ const Playing = () => {
           setHelpContent(PartsOfSpeech[property])
           setRightIndex(index)
         }
-        else {
-          setHelpContent(null)
-        }
       }
     }
   }
@@ -156,9 +164,15 @@ const Playing = () => {
           <div className={styles.storyInfo}>
             <h3>{story.title}</h3>
           </div>
-
-          {/* <Prompt when={isDirtyRef.current} message='Are you sure you want to leave?' /> */}
-
+          {showModal ?
+            <div>
+              <p>OH BEANS</p>
+              <button onClick={handleConfirm}>Yes</button>
+              <button onClick={handleCancel}>No</button>
+            </div>
+            :
+            <></>
+          }
           <form className={styles.inputsForm}>
             <div className={styles.inputsContainer}>
               {story.parts_of_speech.map((part, index) => (
