@@ -1,12 +1,9 @@
-
 .main {
   display: flex;
   flex-direction: column;
   width: 100vw;
   height: 100vh;
   overflow: hidden;
-  flex-grow: 0;
-  flex-shrink: 0;
 }
 
 .outerGrid {
@@ -16,26 +13,84 @@
   height: 100%;
 }
 
-.mainGrid{
+.mainGrid {
   color: #0C185C;
-  display:grid;
+  display: grid;
   grid-template-columns: 100px 1fr;
   grid-template-rows: auto auto auto auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  font-family: "K2D", sans-serif;
+  font-weight: 600;
+  font-size: 24px;
+  z-index:-3;
 }
 
-.columnFlex{
+
+.mainGrid::-webkit-scrollbar {
+  display: none;
+}
+
+.numbers{
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  justify-self: center;
+  margin-top: 17px;
+  font-family: "K2D", sans-serif;
+  font-weight: 800;
+  font-size: 24px;
+  color: #FDFCFF;
+  background-color: #0C185C;
+  height:40px;
+  width:40px;
+  border-radius: 50%;
+}
+
+.columnFlex {
   display: flex;
   flex-direction: column;
 }
-.sideBannerContainer{
-overflow: hidden;
+
+.columnFlex u {
+  font-family: "K2D", sans-serif;
+  font-weight: 800;
+  font-size: 24px;
 }
-.sideBanner{
-  
-  position:absolute;
-  top:200px;
-  width:500px;
+
+.sideBannerContainer {
+  display:flex;
+  overflow: visible;
+
+}
+
+.sideBanner {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top:300px;
+  height:106px;
+width:500px;
   background-color: #B6A4FF;
   color: #5440D5;
+  transform: rotatez(0deg);
+  font-family: "K2D" sans-serif;
+  font-weight: 800;
+  font-size: 48px;
+  z-index:-1
+}
+
+.sideBannerUnder{
+  
+  position: fixed;
+  height:106px;
+  top: 170px;
+  right: -100px;
+  width: 50%;
+  background-color: #5440D5;
   transform: rotatez(20deg);
+  z-index:-2
 }
