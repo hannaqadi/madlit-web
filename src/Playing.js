@@ -79,7 +79,7 @@ const Playing = () => {
 
   // Blocking navigation
   useBlocker((tx) => {
-    if (pendingNavigation.current) return false;
+    if (pendingNavigation.current || filled === true) return false;
     setShowModal(true);
     pendingNavigation.current = tx;
     return true;
@@ -155,7 +155,7 @@ const Playing = () => {
   {/*TODO: Make middle column scrollable globally */ }
   return (
     <div className={styles.main}>
-      {rightIndex !== null ? <div className={styles.mainGreyedOut}></div> : <></>}
+      {rightIndex !== null || showModal ? <div className={styles.mainGreyedOut}></div> : <></>}
       <TopBarNav />
       <div className={styles.outerGrid}>
         <div></div>
@@ -165,10 +165,16 @@ const Playing = () => {
             <h3>{story.title}</h3>
           </div>
           {showModal ?
-            <div>
-              <p>OH BEANS</p>
-              <button onClick={handleConfirm}>Yes</button>
-              <button onClick={handleCancel}>No</button>
+            <div className={styles.leavingContainer}>
+              <i onClick={handleCancel} className="fi fi-br-cross-small"></i>
+              <div>
+                <p>Are you sure you want to leave?</p>
+                <p>Your progress will not be saved</p>
+              </div>
+              <div className={styles.leavingButtons}>
+                <button onClick={handleCancel}>Cancel</button>
+                <button onClick={handleConfirm}>Yes, leave</button>
+              </div>
             </div>
             :
             <></>

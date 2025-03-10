@@ -57,6 +57,70 @@
   padding: 0;
 }
 
+.leavingContainer {
+  display: grid;
+  grid-template-rows: max-content 1fr 0.8fr;
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #FDFCFF;
+  color: rgba(12, 24, 92, 1);
+  border-style: none;
+  border-radius: 7px;
+  height: max-content;
+  width: 30%;
+  z-index: 3;
+}
+
+.leavingContainer i {
+  justify-self: end;
+  color: #0C185C;
+  font-size: 40px;
+  margin-top: 20px;
+  margin-right:20px;
+  cursor:pointer;
+}
+
+.leavingContainer p {
+  justify-self: center;
+  font-family: "K2D", sans-serif;
+  font-weight: 800;
+  font-size: 32px;
+}
+
+.leavingButtons {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
+}
+
+.leavingButtons button{
+  align-self: center;
+  font-family: "K2D", sans-serif;
+  font-weight: 700;
+  font-size: 24px;
+  height:64px;
+  width: 70%;
+  border-style: none;
+  border-radius: 7px;
+  cursor: pointer;
+}
+
+.leavingButtons button:nth-child(1){
+  background-color: #FFA9A9;
+  justify-self: end;
+  margin-right:30px;
+}
+
+
+.leavingButtons button:nth-child(2){
+  background-color: #75E4B3;
+  justify-self: start;
+  margin-left: 30px;
+}
+
 /*----------------------------------------Inputs------------------------------------ */
 .inputsForm {
   font-size: 20px;
@@ -84,7 +148,7 @@
 .posInfo p {
   margin: 0;
   padding: 0;
-  color:#0C185C;
+  color: #0C185C;
   font-family: "K2D", sans-serif;
   font-weight: 700;
 }
@@ -102,6 +166,13 @@
   width: 100%;
 }
 
+input{
+  font-family: "K2D", sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  color: #0C185C;
+  padding-left: 40px;
+}
 
 .inputsComplete {
   margin-bottom: 10px;
@@ -167,7 +238,7 @@
   margin-bottom: 0px;
 }
 
-.helpContentContainer p{
+.helpContentContainer p {
   margin-top: 0px;
   margin-bottom: 30px;
   padding: 0px 20px;
