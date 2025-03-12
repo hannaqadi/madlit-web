@@ -6,6 +6,7 @@ import { ThemeProvider } from "./ThemeContext";
 import Homepage from './Homepage';
 import Playing from './Playing';
 import Reading from './Reading';
+import Contact from './Contact';
 import { Info } from './Info';
 
 const router = createBrowserRouter([
@@ -13,7 +14,7 @@ const router = createBrowserRouter([
   { path: "/Playing", element: <Playing /> },
   { path: "/Reading", element: <Reading /> },
   { path: "/Info", element: <Info /> },
-
+  { path: "/Contact", element: <Contact /> },
 ])
 function App() {
   return (

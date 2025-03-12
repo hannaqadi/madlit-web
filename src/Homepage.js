@@ -232,7 +232,7 @@ const Homepage = () => {
                   onClick={() => removeAddedGenres(genre)}
                   className={styles.selectedGenre}>
                   <p> {genre.name} </p>
-                  <i class="fi fi-br-cross-small"></i>
+                  <i className="fi fi-br-cross-small"></i>
                 </span>
               ))}
           </div>
@@ -242,7 +242,7 @@ const Homepage = () => {
               <div className={styles.genreTitle}>
                 <div></div>
                 <h2>Genres</h2>
-                <i onClick={() => toggleShowGenres()} class="fi fi-br-cross-small"></i>
+                <i onClick={() => toggleShowGenres()} className="fi fi-br-cross-small"></i>
               </div>
               <div className={styles.genreList}>
                 <ul>
@@ -255,10 +255,8 @@ const Homepage = () => {
                       >
                         <div style={{ backgroundColor: colors[index % 4] }}></div>
                         <p>{genre.name}</p>
-                        {genre.selected === true ?
-                          <input type="checkbox" checked />
-                          : <input type="checkbox" />
-                        }
+                          <input type="checkbox" checked={genre.selected} />
+                          {console.log("genre" ,genre.selected, index)}
                       </li>
                     )
                   })}

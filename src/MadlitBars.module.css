@@ -121,6 +121,7 @@
   border-radius: 7px;
   background-color: #0C185C;
   color: #B6A4FF;
+  cursor:pointer;
 }
 
 .shareContainer {

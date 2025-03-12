@@ -45,7 +45,7 @@ export const TopBarNav = () => {
                   <i className="fi fi-rr-share-square"></i>
                 </div>
               </button>
-              <button>Contact</button>
+              <button onClick={() => navigate('/Contact')}>Contact</button>
             </div>
           ) : <></>}
         </div>
