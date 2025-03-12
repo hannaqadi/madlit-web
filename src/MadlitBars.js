@@ -20,13 +20,13 @@ export const TopBarNav = () => {
     <div className={styles.topBannerGrid}>
       <div></div>
       <div className={styles.logoAndNav}>
-        <h4>MAD LIT</h4>
+        <h4 onClick={() => navigate('/')}>MAD LIT</h4>
         <div className={styles.buttonContainer}>
           <div className={styles.buttonNav}>
-            <div onClick={() => navigate('/Info')} className={styles.buttons}>
+            <div onClick={() => navigate('/Info')} className={styles.infoButton}>
               <i className="fi fi-rr-info"></i>
             </div>
-            <div onClick={settingsDropDown} className={showSettings ? styles.settingsClicked : styles.buttons}>
+            <div onClick={settingsDropDown} className={showSettings ? styles.settingsClicked : styles.settingsButton}>
               <i className="fi fi-sr-settings"></i>
             </div>
           </div>

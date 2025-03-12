@@ -21,6 +21,7 @@
   font-family: "Permanent Marker", serif;
   font-weight: normal;
   font-size: 48px;
+  cursor: pointer;
 }
 
 .buttonContainer {
@@ -33,12 +34,9 @@
 
 .buttonNav {
   display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 0
 }
 
-.buttons {
+.infoButton {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -48,14 +46,34 @@
   color: #B6A4FF;
   height: 56px;
   width: 55px;
-  margin-left: 15px;
   cursor: pointer;
 }
 
-.buttons i {
+.infoButton i {
   font-style: normal;
   font-size: 30px;
 }
+
+
+.settingsButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-style: none;
+  border-radius: 7px;
+  background-color: #0C185C;
+  color: #B6A4FF;
+  height: 56px;
+  width: 55px;
+  margin-left: 50px;
+  cursor: pointer;
+}
+
+.settingsButton i {
+  font-style: normal;
+  font-size: 30px;
+}
+
 
 .settingsClicked {
   display: flex;
@@ -67,7 +85,7 @@
   color: #5440D5;
   height: 56px;
   width: 55px;
-  margin-left: 15px;
+  margin-left: 50px;
   cursor: pointer;
 }
 

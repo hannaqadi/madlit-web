@@ -129,7 +129,7 @@ const Homepage = () => {
     if (!!localStorage.getItem('finalStory')) {
       localStorage.removeItem('finalStory')
     }
-    
+
     const genre = genres.find((g) => g.id === story.genre_id);
     if (genre) {
       localStorage.setItem('story', JSON.stringify(story));
@@ -216,7 +216,8 @@ const Homepage = () => {
               <button
                 onClick={() => toggleShowGenres()}
                 className={styles.genreButton}>
-                Genres
+               <p> Genres </p>
+                <i className="fi fi-rr-settings-sliders"></i>
               </button>
             </div>
           </div>
