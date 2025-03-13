@@ -10,7 +10,6 @@ const Homepage = () => {
   const [genres, setGenres] = useState([])
   const [selectedGenres, setSelectedGenres] = useState([])
   const [showGenres, setShowGenres] = useState(false)
-  const [cardGenre, setCardGenre] = useState('')
   const [stories, setStories] = useState([])
   const [search, setSearch] = useState('')
   const [page, setPage] = useState(1);
@@ -42,7 +41,6 @@ const Homepage = () => {
         return { ...genre, selected: false }
       })
       setGenres(addSelected)
-      console.log(data.genres)
     } catch (error) {
       console.log(error.message)
     }
@@ -142,7 +140,6 @@ const Homepage = () => {
   };
 
   const handleGenreSelect = (genre) => {
-    setShowGenres(true)
     //Set genres state to selected true
     setGenres((prev) => {
       return prev.map((g) => {
@@ -151,14 +148,20 @@ const Homepage = () => {
           : g
       })
     });
-    console.log('genres', genres)
-    setSelectedGenres((prevGenres) =>
-      [...prevGenres, genre]
-    );
-    console.log('selectedgenres', selectedGenres)
+  };
+
+  const updateGenres = () => {
+    let updatedGenres = []
+    genres.forEach(element => {
+      if (element.selected === true) {
+        updatedGenres.push(element)
+      }
+    });
+    setSelectedGenres( [...updatedGenres]);
+    toggleShowGenres()
     setStories([]);
     setPage(1);
-  };
+  }
 
   const removeAddedGenres = (genre) => {
     //Set selected to false for genres
@@ -174,6 +177,8 @@ const Homepage = () => {
     setSelectedGenres((prev) =>
       prev.filter((g) => g.id !== genre.id)
     );
+    setStories([]);
+    setPage(1);
   }
 
   const storiesGenre = (story) => {
@@ -211,17 +216,15 @@ const Homepage = () => {
               <i className="fi fi-rr-search"></i>
 
             </form>
-
             <div className={styles.genreSelectContainer}>
               <button
                 onClick={() => toggleShowGenres()}
                 className={styles.genreButton}>
-               <p> Genres </p>
+                <p> Genres </p>
                 <i className="fi fi-rr-settings-sliders"></i>
               </button>
             </div>
           </div>
-
           {/*Selected Genres*/}
           <div>
             Stories
@@ -255,13 +258,13 @@ const Homepage = () => {
                       >
                         <div style={{ backgroundColor: colors[index % 4] }}></div>
                         <p>{genre.name}</p>
-                          <input type="checkbox" checked={genre.selected} />
-                          {console.log("genre" ,genre.selected, index)}
+                        <input type="checkbox" defaultChecked={genre.selected} />
+                        {/* {console.log("genre", genre.selected, index)} */}
                       </li>
                     )
                   })}
                 </ul>
-                <button>Update genres</button>
+                <button onClick={() => updateGenres()}>Update genres</button>
               </div>
             </div>
           ) : null}
