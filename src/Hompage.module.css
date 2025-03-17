@@ -120,8 +120,9 @@ button {
   border-style: solid;
   border-color: #7A7EA8;
   border-width: 2px;
-  outline:none;
+  outline: none;
 }
+
 /*------------------------------------Genre Select-------------------------------------*/
 
 .genreSelectContainer {
@@ -139,30 +140,27 @@ button {
   border-color: #464F83;
   border-radius: 7px;
   background-color: #FDFCFF;
-  color:#0C185C;
+  color: #0C185C;
   cursor: pointer;
   height: 45px;
   width: 110px;
-  display:grid;
+  display: grid;
   grid-template-columns: 1fr 1fr;
 }
 
 .genreButton p {
   align-self: center;
   justify-self: end;
-  padding:0;
-  margin:0;
+  padding: 0;
+  margin: 0;
   margin-left: 10px;
 }
 
 .genreButton i {
-  color:#0C185C;
+  color: #0C185C;
   margin-top: 3px;
   align-self: center;
   justify-self: center;
-}
-.genreContainer {
-  margin-left: 10px;
 }
 
 .selectedGenre {
@@ -205,8 +203,7 @@ button {
   background-color: #FDFCFF;
   border-style: none;
   border-radius: 7px;
-  height: 90%;
-  /*TODO Make height auto?? */
+  height: min-content;
   width: 17%;
   padding-right: 20px;
   padding-left: 20px;
@@ -238,6 +235,8 @@ button {
 }
 
 .genreList {
+  display: grid;
+  grid-template-rows: 2fr 0.3fr;
   height: 100%;
 }
 
@@ -245,15 +244,16 @@ button {
   list-style: none;
   padding: 0;
   margin: 0;
+  margin-left: 40px;
+  margin-right: 40px;
 }
 
 .genreList li {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+ align-items: flex-start;
   cursor: pointer;
   width: 100%;
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .genreList div {
@@ -273,15 +273,39 @@ button {
   padding: 0;
 }
 
-.genreList input {
+.genreList input[type="checkbox"] {
+  appearance: none; 
+  -webkit-appearance: none;
+  -moz-appearance: none;
+ flex: 0 0 25px;
+  width: 5px;
   height: 25px;
-  width: 25px;
-  color: #5440D5;
-  border-radius: 4px;
+  background-color: white; 
+  border-style: solid;
+  border-width: 2px;
+  border-color: #C8C4E0;
+  border-radius: 4px; 
+  cursor: pointer;
+  position:relative;
+}
 
+.genreList input[type="checkbox"]:checked {
+  background-color: #5440D5; 
+  border-color: white;
+}
+
+.genreList input[type="checkbox"]:checked::after {
+  content: "✔";
+  font-size: 18px;
+  color: white;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 }
 
 .genreList button {
+  justify-self: center;
   font-family: "K2D", sans-serif;
   font-weight: 700;
   border-style: none;
@@ -290,7 +314,7 @@ button {
   color: #B6A4FF;
   font-size: 20px;
   height: 37px;
-  width: 100%;
+  width: 80%;
   cursor: pointer;
 }
 
