@@ -30,12 +30,7 @@ button {
 }
 
 /*-----------------------------------------------Central Grids-----------------------------------*/
-.outerGrid {
-  display: grid;
-  grid-template-columns: 1fr 2fr 1fr;
-  overflow: hidden;
-  height: 100%;
-}
+
 
 .mainGrid {
   display: grid;
@@ -77,8 +72,9 @@ button {
 /*-----------------------------------Search Bar--------------------------------------*/
 .searchContainer {
   display: flex;
-  align-self: flex-start;
-  width: 100%;
+  align-self: center;
+  justify-self: center;
+  width: 50%;
   margin-top: 20px;
   margin-bottom: 10px;
 }
@@ -163,6 +159,7 @@ button {
   justify-self: center;
 }
 
+
 .selectedGenre {
   display: flex;
   flex-direction: row;
@@ -204,7 +201,6 @@ button {
   border-style: none;
   border-radius: 7px;
   height: min-content;
-  width: 17%;
   padding-right: 20px;
   padding-left: 20px;
   z-index: 3;
@@ -250,7 +246,7 @@ button {
 
 .genreList li {
   display: flex;
- align-items: flex-start;
+  align-items: flex-start;
   cursor: pointer;
   width: 100%;
   margin-bottom: 30px;
@@ -273,36 +269,18 @@ button {
   padding: 0;
 }
 
-.genreList input[type="checkbox"] {
-  appearance: none; 
-  -webkit-appearance: none;
-  -moz-appearance: none;
- flex: 0 0 25px;
-  width: 5px;
-  height: 25px;
-  background-color: white; 
+.genreList input {
+  width: 30px;
+  height: 30px;
+  background-color: white;
   border-style: solid;
   border-width: 2px;
   border-color: #C8C4E0;
-  border-radius: 4px; 
+  border-radius: 4px;
   cursor: pointer;
-  position:relative;
+  position: relative;
 }
 
-.genreList input[type="checkbox"]:checked {
-  background-color: #5440D5; 
-  border-color: white;
-}
-
-.genreList input[type="checkbox"]:checked::after {
-  content: "✔";
-  font-size: 18px;
-  color: white;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-}
 
 .genreList button {
   justify-self: center;
@@ -313,49 +291,70 @@ button {
   background-color: #0C185C;
   color: #B6A4FF;
   font-size: 20px;
-  height: 37px;
-  width: 80%;
+  height: 43px;
+  width: 75%;
   cursor: pointer;
 }
 
 /*---------------------------------------Stories---------------------------------*/
+.storyGridContainer{
+  display:grid;
+  grid-template-rows: 1fr 1fr;
+}
+.storyGenreContainer{
+  margin-left: 200px;
+}
 .storyCardContainer {
   display: flex;
   flex-wrap: wrap;
-  justify-content: flex-start;
+  justify-content:center;
   gap: 10px;
 }
 
 .storyCard {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 0;
-  flex-shrink: 0;
+  display: grid;
+  grid-template-rows: auto auto auto;
   align-items: center;
   height: 131px;
-  width: auto;
+  width: fit-content;
   max-width: 100%;
-  /* Prevents overflow issues */
   border-style: none;
   border-radius: 7px;
   cursor: pointer;
 }
 
 .storyCard h3 {
-  margin: 0;
+  justify-self: center;
+  margin: 10px;
+  margin-bottom: 0px;
   padding: 0;
   font-family: "Permanent Marker", serif;
-  font-weight: normal;
+  font-weight: 400;
+  font-size: 20px;
 }
 
 .storyCard h5 {
+  font-family: "K2D", sans-serif;
+  font-weight: 600;
+  font-size: 12px;
+  justify-self: center;
   margin-top: 5px;
   margin-bottom: 0;
   padding: 0;
 }
 
 .storyCard p {
+  font-family: "K2D", sans-serif;
+  font-weight: 600;
+  justify-self: center;
+  width: 100%;
+  max-width: 350px;
+  white-space: normal;
+  word-wrap: break-word;
+  text-align: center;
   margin: 0;
+  margin-left: 5px;
+  margin-right: 5px;
   padding-top: 0;
   padding-bottom: 0;
 }

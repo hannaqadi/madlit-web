@@ -157,7 +157,7 @@ const Homepage = () => {
         updatedGenres.push(element)
       }
     });
-    setSelectedGenres( [...updatedGenres]);
+    setSelectedGenres([...updatedGenres]);
     toggleShowGenres()
     setStories([]);
     setPage(1);
@@ -181,11 +181,19 @@ const Homepage = () => {
     setPage(1);
   }
 
-  const storiesGenre = (story) => {
+  const storiesGenre = (story, index) => {
+    const colors = ['#004751', 'rgba(111, 74, 20, 0.75)', 'rgba(165, 51, 123, 0.75)', 'rgba(0, 71, 81, 0.75)', '#7D2A2A']
     const genre = genres.find((genre) => genre.id === story.genre_id);
+
+    const genreArr = genre.name.split("")
+    let genreFinal = []
+    genreArr.forEach((element) => {
+      genreFinal.push(element)
+      genreFinal.push(" ")
+    });
     if (genre) {
       return (
-        <h5>[ {genre.name} ]</h5>
+        <h5 style={{ color: colors[index % 5] }}>[ {genreFinal} ]</h5>
       )
     }
   }
@@ -194,39 +202,71 @@ const Homepage = () => {
     <div className={styles.main}>
       {showGenres ? <div className={styles.mainGreyedOut}></div> : <></>}
       <TopBarNav />
-      <div className={styles.outerGrid}>
-        <div></div>
-        <div className={styles.mainGrid} ref={mainGridRef}>
-          <div className={styles.header}>
-            <h1>Lets Play a Game!</h1>
-            <h2>Choose a story genre or search by title :3</h2>
+
+
+      <div className={styles.mainGrid} ref={mainGridRef}>
+        <div className={styles.header}>
+          <h1>Lets Play a Game!</h1>
+          <h2>Choose a story genre or search by title :3</h2>
+        </div>
+
+        {/*Search bar and genre button*/}
+        <div className={styles.searchContainer}>
+          <form
+            className={styles.searchBar}
+            onSubmit={handleSubmitSearch}
+          >
+            <input
+              placeholder="Search stories..."
+              value={search}
+              onChange={handleInputChange}
+            />
+            <i className="fi fi-rr-search"></i>
+
+          </form>
+          <div className={styles.genreSelectContainer}>
+            <button
+              onClick={() => toggleShowGenres()}
+              className={styles.genreButton}>
+              <p> Genres </p>
+              <i className="fi fi-rr-settings-sliders"></i>
+            </button>
           </div>
+        </div>
 
-          {/*Search bar and genre button*/}
-          <div className={styles.searchContainer}>
-            <form
-              className={styles.searchBar}
-              onSubmit={handleSubmitSearch}
-            >
-              <input
-                placeholder="Search stories..."
-                value={search}
-                onChange={handleInputChange}
-              />
-              <i className="fi fi-rr-search"></i>
+        {/*Genre List*/}
+        {showGenres ? (
+          <div className={styles.genreContainer}>
+            <div className={styles.genreTitle}>
+              <div></div>
+              <h2>Genres</h2>
+              <i onClick={() => toggleShowGenres()} className="fi fi-br-cross-small"></i>
+            </div>
+            <div className={styles.genreList}>
+              <ul>
+                {genres.map((genre, index) => {
+                  const colors = [' #FFAFE2', '#FAC87F', '#3DD8ED', '#73E3B1'];
+                  return (
+                    <li
+                      key={index}
+                      onClick={() => handleGenreSelect(genre)}
+                    >
+                      <div style={{ backgroundColor: colors[index % 4] }}></div>
+                      <p>{genre.name}</p>
 
-            </form>
-            <div className={styles.genreSelectContainer}>
-              <button
-                onClick={() => toggleShowGenres()}
-                className={styles.genreButton}>
-                <p> Genres </p>
-                <i className="fi fi-rr-settings-sliders"></i>
-              </button>
+                      <input type="checkbox" defaultChecked={genre.selected} />
+
+                    </li>
+                  )
+                })}
+              </ul>
+              <button onClick={() => updateGenres()}>Update genres</button>
             </div>
           </div>
+        ) : null}
+        <div className={styles.storyGrid}>
           {/*Selected Genres*/}
-          <div>
+          <div className={styles.storyGenreContainer}>
             Stories
             {selectedGenres
               .map((genre) => (
@@ -239,51 +279,21 @@ const Homepage = () => {
                 </span>
               ))}
           </div>
-          {/*Genre List*/}
-          {showGenres ? (
-            <div className={styles.genreContainer}>
-              <div className={styles.genreTitle}>
-                <div></div>
-                <h2>Genres</h2>
-                <i onClick={() => toggleShowGenres()} className="fi fi-br-cross-small"></i>
-              </div>
-              <div className={styles.genreList}>
-                <ul>
-                  {genres.map((genre, index) => {
-                    const colors = [' #FFAFE2', '#FAC87F', '#3DD8ED', '#73E3B1'];
-                    return (
-                      <li
-                        key={index}
-                        onClick={() => handleGenreSelect(genre)}
-                      >
-                        <div style={{ backgroundColor: colors[index % 4] }}></div>
-                        <p>{genre.name}</p>
-                        <input type="checkbox" defaultChecked={genre.selected} />
-                        {/* {console.log("genre", genre.selected, index)} */}
-                      </li>
-                    )
-                  })}
-                </ul>
-                <button onClick={() => updateGenres()}>Update genres</button>
-              </div>
-            </div>
-          ) : null}
-
           {/*Story cards*/}
           <div className={styles.storyCardContainer}>
             {stories.length > 0 ? (
               stories.map((story, index) => {
-                const colors = [' #3DD8ED', '#FAC87F', ' #FFAFE2'];
+                const colors = [' #3DD8ED', '#FAC87F', '#FFAFE2', '#75E4B3', '#FFA9A9'];
                 return (
                   <div
                     key={index}
                     onClick={() => handleStorySelect(story)}
-                    style={{ backgroundColor: colors[index % 3] }}
+                    style={{ backgroundColor: colors[index % 5] }}
                     className={styles.storyCard}
                   >
                     <h3>{story.title}</h3>
                     <p>{story.story}</p>
-                    {storiesGenre(story)}
+                    {storiesGenre(story, index)}
                   </div>
                 )
               })
@@ -298,9 +308,7 @@ const Homepage = () => {
             )}
             {!hasMore && <p>Loaded!</p>}
           </div>
-
         </div>
-        <div></div>
       </div>
       <BottomBanner />
     </div>
