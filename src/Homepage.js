@@ -264,10 +264,11 @@ const Homepage = () => {
             </div>
           </div>
         ) : null}
-        <div className={styles.storyGrid}>
-          {/*Selected Genres*/}
+            {/*Selected Genres*/}
+        <div className={styles.storySelectGrid}>
+      <div></div>
           <div className={styles.storyGenreContainer}>
-            Stories
+            <h1>Stories</h1>
             {selectedGenres
               .map((genre) => (
                 <span
@@ -279,36 +280,38 @@ const Homepage = () => {
                 </span>
               ))}
           </div>
-          {/*Story cards*/}
-          <div className={styles.storyCardContainer}>
-            {stories.length > 0 ? (
-              stories.map((story, index) => {
-                const colors = [' #3DD8ED', '#FAC87F', '#FFAFE2', '#75E4B3', '#FFA9A9'];
-                return (
-                  <div
-                    key={index}
-                    onClick={() => handleStorySelect(story)}
-                    style={{ backgroundColor: colors[index % 5] }}
-                    className={styles.storyCard}
-                  >
-                    <h3>{story.title}</h3>
-                    <p>{story.story}</p>
-                    {storiesGenre(story, index)}
-                  </div>
-                )
-              })
-            ) : (
-              <p>Whoops! There's nothing here </p>
-            )
-            }
-            {hasMore && (
-              <div ref={loader} style={{ height: "50px", backgroundColor: "lightgray" }}>
-                Loading more stories...
-              </div>
-            )}
-            {!hasMore && <p>Loaded!</p>}
-          </div>
+          <div></div>
         </div>
+        {/*Story cards*/}
+        <div className={styles.storyCardContainer}>
+          {stories.length > 0 ? (
+            stories.map((story, index) => {
+              const colors = [' #3DD8ED', '#FAC87F', '#FFAFE2', '#75E4B3', '#FFA9A9'];
+              return (
+                <div
+                  key={index}
+                  onClick={() => handleStorySelect(story)}
+                  style={{ backgroundColor: colors[index % 5] }}
+                  className={styles.storyCard}
+                >
+                  <h3>{story.title}</h3>
+                  <p>{story.story}</p>
+                  {storiesGenre(story, index)}
+                </div>
+              )
+            })
+          ) : (
+            <p>Whoops! There's nothing here </p>
+          )
+          }
+          {hasMore && (
+            <div ref={loader} style={{ height: "50px", backgroundColor: "lightgray" }}>
+              Loading more stories...
+            </div>
+          )}
+          {!hasMore && <p>Loaded!</p>}
+        </div>
+
       </div>
       <BottomBanner />
     </div>
