@@ -4,7 +4,7 @@
   width: 100vw;
   height: 100vh;
   overflow-x: hidden;
-  color:#0C185C;
+  color: #0C185C;
 }
 
 .outerGrid {
@@ -18,19 +18,21 @@
   display: grid;
   grid-template-rows: auto auto;
 }
-.title{
+
+.title {
   justify-self: center;
-font-family: "Permanent Marker", serif;
-font-weight: 400;
-font-size: 40px;
+  font-family: "Permanent Marker", serif;
+  font-weight: 400;
+  font-size: 40px;
 }
 
-.readingContainer{
+.readingContainer {
   font-family: "K2D" sans-serif;
   font-weight: 600;
   font-size: 24px;
-  margin:20px;
+  margin: 20px;
 }
+
 .buttonContainer {
   display: grid;
   grid-template-rows: max-content max-content;
@@ -50,13 +52,25 @@ font-size: 40px;
   cursor: pointer;
 }
 
-.topButtons{
+.topButtons {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 30px;
   margin-bottom: 30px;
 }
 
+.shareContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.shareIcon {
+  position: relative;
+  top: 2px;
+  margin-left: 10px;
+}
+
 .shareIcon i {
-  font-size: 16px;
+  font-size: 25px;
 }

@@ -7,6 +7,7 @@ export const TopBarNav = () => {
   const navigate = useNavigate();
   const { theme, toggleTheme } = useTheme();
   const [showSettings, setShowSettings] = useState(false)
+  const [copied, setCopied] = useState(false);
 
   useEffect(() => {
     document.documentElement.setAttribute("data-theme", theme);
@@ -15,6 +16,17 @@ export const TopBarNav = () => {
   const settingsDropDown = () => {
     setShowSettings((prev) => !prev)
   }
+  const copyToClipboard = () => {
+    //TODO: Enter actual URL below for sharing
+    const text = "Hello, this text has been copied!";
+    navigator.clipboard.writeText(text)
+      .then(() => setCopied(true))
+      .catch((err) => console.error("Failed to copy: ", err));
+  };
+
+  useEffect(() => {
+    setCopied(false)
+  }, [])
 
   return (
     <div className={styles.topBannerGrid}>
@@ -33,17 +45,23 @@ export const TopBarNav = () => {
           {showSettings ? (
             <div className={styles.settingsContainer}>
               <div className={styles.themeContainer}>
-              <p>{theme} Mode</p>
-              <label className={styles.switch}>
-                <input type="checkbox" />
-                <span onClick={toggleTheme} className={styles.slider}></span>
-              </label>
+                <p>{theme} Mode</p>
+                <label className={styles.switch}>
+                  <input type="checkbox" />
+                  <span onClick={toggleTheme} className={styles.slider}></span>
+                </label>
               </div>
-              <button className={styles.shareContainer}>
-                Share
-                <div className={styles.shareIcon}>
-                  <i className="fi fi-rr-share-square"></i>
-                </div>
+              <button className={styles.shareContainer} onClick={copyToClipboard}>
+                {copied ?
+                  "Copied Link!"
+                  :
+                  <div>
+                    Share
+                    <div className={styles.shareIcon}>
+                      <i className="fi fi-rr-share-square"></i>
+                    </div>
+                  </div>}
+
               </button>
               <button onClick={() => navigate('/Contact')}>Contact</button>
             </div>

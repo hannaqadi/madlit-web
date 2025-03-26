@@ -12,6 +12,7 @@ const Reading = () => {
   const [isLoaded, setIsLoaded] = useState(false)
   const [finalStory, setFinalStory] = useState([])
   const [storyTitle, setStoryTitle] = useState("")
+  const [copied, setCopied] = useState(false);
 
 
   useEffect(() => {
@@ -87,6 +88,14 @@ const Reading = () => {
     }
     return <p>{parts}</p>;
   }
+
+  const copyToClipboard = () => {
+
+    const text = "Hello, this text has been copied!";
+    navigator.clipboard.writeText(finalStory.join(" "))
+      .then(() => setCopied(true))
+      .catch((err) => console.error("Failed to copy: ", err));
+  };
   return (
     <div className={styles.main}>
       <TopBarNav />
@@ -105,7 +114,19 @@ const Reading = () => {
                 <button onClick={handlePlayAgain} >Play again!</button>
                 <button onClick={() => navigate('/')}>Back to Stories</button>
               </div>
-              <button className={styles.shareIcon}>Share   <i className="fi fi-rr-share-square"></i></button>
+              <button onClick={copyToClipboard}>
+                {copied ?
+                  "Copied Story!"
+                  :
+                  <div className={styles.shareContainer} >
+                    Share
+                    <div className={styles.shareIcon}>
+                      <i className="fi fi-rr-share-square"></i>
+                    </div>
+                  </div>
+                }
+
+              </button>
             </div>
           </div>
         )

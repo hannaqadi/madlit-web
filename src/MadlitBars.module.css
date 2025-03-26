@@ -133,7 +133,8 @@
 
 .shareIcon {
   position: absolute;
-  left: 100px;
+  right: 20px;
+  top:6px;
 }
 
 .shareIcon i {
