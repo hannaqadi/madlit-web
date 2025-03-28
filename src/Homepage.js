@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TopBarNav } from "./MadlitBars";
 import { BottomBanner } from "./MadlitBars";
 import styles from "./Hompage.module.css"
-
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
 
 const Homepage = () => {
   const navigate = useNavigate();
@@ -35,7 +35,7 @@ const Homepage = () => {
 
   const fetchGenres = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/genres`)
+      const response = await fetch(`${API_URL}/api/genres`)
       const data = await response.json()
       const addSelected = data.genres.map((genre) => {
         return { ...genre, selected: false }
@@ -52,7 +52,7 @@ const Homepage = () => {
     try {
       const genreIds = selectedGenres.map((genre) => genre.id).join(',');
 
-      const response = await fetch(`http://localhost:5000/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}&genres=${encodeURIComponent(genreIds)}`);
+      const response = await fetch(`${API_URL}/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}&genres=${encodeURIComponent(genreIds)}`);
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
