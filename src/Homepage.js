@@ -76,9 +76,11 @@ const Homepage = () => {
     //Prevents initial render
     if (isInitialRender.current) {
       isInitialRender.current = false;
-      return;
+    } else {
+      console.log('fetching stories before in useEffect')
+      fetchStories();
+      console.log('fetching stories after in useEffect')
     }
-    fetchStories();
   }, [page, selectedGenres])
 
   //Fetches genres ONLY on page load
@@ -270,9 +272,9 @@ const Homepage = () => {
             </div>
           </div>
         ) : null}
-            {/*Selected Genres*/}
+        {/*Selected Genres*/}
         <div className={styles.storySelectGrid}>
-      <div></div>
+          <div></div>
           <div className={styles.storyGenreContainer}>
             <h1>Stories</h1>
             {selectedGenres
