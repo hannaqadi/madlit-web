@@ -36,9 +36,7 @@ const Homepage = () => {
   const fetchGenres = async () => {
     try {
       const response = await fetch(`${API_URL}/api/genres`)
-      console.log('genres response:', response)
       const data = await response.json()
-      console.log('genres data:', data)
       const addSelected = data.genres.map((genre) => {
         return { ...genre, selected: false }
       })
@@ -49,9 +47,12 @@ const Homepage = () => {
   }
 
   const fetchStories = async () => {
+    console.log('start fetchStories')
     if (loading) return;
     setLoading(true);
+    console.log('before try, after loading true state')
     try {
+      console.log('inside fetchStories TRY')
       const genreIds = selectedGenres.map((genre) => genre.id).join(',');
 
       const response = await fetch(`${API_URL}/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}&genres=${encodeURIComponent(genreIds)}`);
@@ -71,6 +72,7 @@ const Homepage = () => {
   };
 
   useEffect(() => {
+    console.log('useEffect before initial render and before fetchStories')
     //Prevents initial render
     if (isInitialRender.current) {
       isInitialRender.current = false;
