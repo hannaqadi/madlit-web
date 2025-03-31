@@ -36,7 +36,9 @@ const Homepage = () => {
   const fetchGenres = async () => {
     try {
       const response = await fetch(`${API_URL}/api/genres`)
+      console.log('genres response:', response)
       const data = await response.json()
+      console.log('genres data:', data)
       const addSelected = data.genres.map((genre) => {
         return { ...genre, selected: false }
       })
@@ -56,7 +58,9 @@ const Homepage = () => {
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
+      console.log('stories response:', response)
       const data = await response.json();
+      console.log('stories data:', data)
       setStories(prev => [...prev, ...data.stories]);
       setHasMore(page < data.totalPages); // Check if there are more pages
     } catch (error) {
