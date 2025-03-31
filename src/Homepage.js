@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { TopBarNav } from "./MadlitBars";
 import { BottomBanner } from "./MadlitBars";
 import styles from "./Hompage.module.css"
-const API_URL = process.env.NEXT_PUBLIC_BACKEND_URL;
+const API_URL = "https://madlit-backend.onrender.com";
 
 const Homepage = () => {
   const navigate = useNavigate();
