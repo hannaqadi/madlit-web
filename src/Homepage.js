@@ -73,14 +73,11 @@ const Homepage = () => {
 
   useEffect(() => {
     console.log('useEffect before initial render and before fetchStories')
-    //Prevents initial render
-    if (isInitialRender.current) {
-      isInitialRender.current = false;
-    } else {
+ 
       console.log('fetching stories before in useEffect')
       fetchStories();
       console.log('fetching stories after in useEffect')
-    }
+    
   }, [page, selectedGenres])
 
   //Fetches genres ONLY on page load
