@@ -48,7 +48,6 @@
   padding: 0;
   padding-top: 20px;
   padding-bottom: 20px;
-  color: rgba(12, 24, 92, 1);
   font-family: "Permanent Marker", serif;
   font-weight: 400;
   font-size: 40px;
@@ -151,7 +150,6 @@
 .posInfo p {
   margin: 0;
   padding: 0;
-  color: #0C185C;
   font-family: "K2D", sans-serif;
   font-weight: 700;
 }

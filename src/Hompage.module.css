@@ -11,7 +11,7 @@ button {
 }
 
 .main {
-  color: #0C185C;
+ 
   display: flex;
   flex-direction: column;
   width: 100vw;
@@ -326,6 +326,7 @@ button {
 }
 
 .storyCardContainer {
+  color: #0C185C;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
