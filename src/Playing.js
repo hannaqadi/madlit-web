@@ -41,9 +41,7 @@ const Playing = () => {
   useEffect(() => {
     const mediaQuery = window.matchMedia('(max-width: 1000px)');
     const handler = (e) => setIsMobile(e.matches);
-    // ✅ use modern event listeners
     mediaQuery.addEventListener('change', handler);
-    // Initial check
     setIsMobile(mediaQuery.matches);
     return () => mediaQuery.removeEventListener('change', handler);
   }, []);
