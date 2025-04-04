@@ -379,3 +379,38 @@ button {
   padding-top: 0;
   padding-bottom: 0;
 }
+
+/*------------------------------MOBILE-----------------------*/
+
+@media (max-width: 600px){
+  .mainGrid {
+    grid-template-rows: 10vh min-content min-content;
+  }
+
+  .header h1 {
+    font-size: 16px;
+  }
+  .header h2 {
+    font-size: 16px;
+  }
+  .searchContainer {
+    width: 80%; 
+  }
+  .searchBar input {
+    font-size: 16px;    
+    height: 47px;
+    padding-left: 30px;
+  }
+  .genreSelectContainer {
+    margin: 0;
+  }
+  .genreButton {
+    margin-top: 10px;
+    font-size: 14px;
+    height: 33px;
+  }
+  .selectedGenre {
+    height: 25px;
+    margin-top: 11px;
+  }
+}

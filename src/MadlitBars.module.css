@@ -121,7 +121,7 @@
   border-radius: 7px;
   background-color: #0C185C;
   color: #B6A4FF;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .shareContainer {
@@ -134,7 +134,7 @@
 .shareIcon {
   position: absolute;
   right: 20px;
-  top:6px;
+  top: 6px;
 }
 
 .shareIcon i {
@@ -219,4 +219,54 @@ input:checked+.slider:before {
   width: 100vw;
   height: 8vh;
   background-color: #5440D5;
+}
+
+
+/*----------------------------------------MOBILE-------------------------------------*/
+
+
+@media (max-width: 600px) {
+  .topBannerGrid {
+    grid-template-columns: 1fr 10fr 1fr;
+    height: 8vh;
+  }
+
+  .logoAndNav {
+    grid-template-columns: 2fr 1fr;
+  }
+
+  .logoAndNav h4 {
+    font-size: 40px;
+  }
+
+  .infoButton {
+    height: 43px;
+    width: 42px;
+  }
+
+  .infoButton i {
+    font-size: 25px;
+  }
+  .settingsButton {
+    height: 43px;
+    width: 42px;
+    margin-left: 20px;
+  }
+
+  .settingsButton i {
+    font-size: 25px;
+  }
+  
+.settingsClicked {
+  height: 43px;
+  width: 42px;
+  margin-left: 20px;
+
+}
+.settingsClicked i {
+  font-size: 25px;
+}
+.settingsContainer {
+  top: 40px;
+}
 }

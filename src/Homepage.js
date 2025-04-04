@@ -15,9 +15,11 @@ const Homepage = () => {
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(false);
   const [loading, setLoading] = useState(false);
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 600)
   const loader = useRef(null);
   const isInitialRender = useRef(true);
   const mainGridRef = useRef(null);
+
 
   /*Global Scrolling*/
   useEffect(() => {
@@ -33,6 +35,18 @@ const Homepage = () => {
     };
   }, []);
 
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const handler = (e) => setIsMobile(e.matches);
+    // ✅ use modern event listeners
+    mediaQuery.addEventListener('change', handler);
+    // Initial check
+    setIsMobile(mediaQuery.matches);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
+
   const fetchGenres = async () => {
     try {
       const response = await fetch(`${API_URL}/api/genres`)
@@ -47,21 +61,15 @@ const Homepage = () => {
   }
 
   const fetchStories = async () => {
-    console.log('start fetchStories')
     if (loading) return;
     setLoading(true);
-    console.log('before try, after loading true state')
     try {
-      console.log('inside fetchStories TRY')
       const genreIds = selectedGenres.map((genre) => genre.id).join(',');
-
       const response = await fetch(`${API_URL}/api/stories?page=${page}&limit=3&search=${encodeURIComponent(search)}&genres=${encodeURIComponent(genreIds)}`);
       if (!response.ok) {
         throw new Error('Failed to fetch stories');
       }
-      console.log('stories response:', response)
       const data = await response.json();
-      console.log('stories data:', data)
       setStories(prev => [...prev, ...data.stories]);
       setHasMore(page < data.totalPages); // Check if there are more pages
     } catch (error) {
@@ -72,12 +80,15 @@ const Homepage = () => {
   };
 
   useEffect(() => {
-    console.log('useEffect before initial render and before fetchStories')
- 
-      console.log('fetching stories before in useEffect')
-      fetchStories();
-      console.log('fetching stories after in useEffect')
-    
+
+    if (isInitialRender.current) {
+      isInitialRender.current = false;
+      return;
+    }
+    //Remove InitialRender in production
+    fetchStories();
+
+
   }, [page, selectedGenres])
 
   //Fetches genres ONLY on page load
@@ -229,14 +240,18 @@ const Homepage = () => {
             <i className="fi fi-rr-search"></i>
 
           </form>
-          <div className={styles.genreSelectContainer}>
-            <button
-              onClick={() => toggleShowGenres()}
-              className={styles.genreButton}>
-              <p> Genres </p>
-              <i className="fi fi-rr-settings-sliders"></i>
-            </button>
-          </div>
+          {!isMobile ?
+            <div className={styles.genreSelectContainer}>
+              <button
+                onClick={() => toggleShowGenres()}
+                className={styles.genreButton}>
+                <p> Genres </p>
+                <i className="fi fi-rr-settings-sliders"></i>
+              </button>
+            </div>
+            : <></>
+          }
+
         </div>
 
         {/*Genre List*/}
@@ -273,7 +288,17 @@ const Homepage = () => {
         <div className={styles.storySelectGrid}>
           <div></div>
           <div className={styles.storyGenreContainer}>
-            <h1>Stories</h1>
+            {!isMobile ? <h1>Stories</h1>
+            : <div className={styles.genreSelectContainer}>
+              <button
+                onClick={() => toggleShowGenres()}
+                className={styles.genreButton}>
+                <p> Genres </p>
+                <i className="fi fi-rr-settings-sliders"></i>
+              </button>
+            </div>
+            }
+          
             {selectedGenres
               .map((genre) => (
                 <span
@@ -314,7 +339,6 @@ const Homepage = () => {
               Loading more stories...
             </div>
           )}
-          {!hasMore && <p>Loaded!</p>}
         </div>
 
       </div>
