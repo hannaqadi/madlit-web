@@ -17,10 +17,12 @@ const Playing = () => {
   const [showModal, setShowModal] = useState(false);
   const [helpContent, setHelpContent] = useState('')
   const [rightIndex, setRightIndex] = useState(null)
+  const [isMobile, setIsMobile] = useState(window.innerWidth <= 1000)
   const isSubmittingRef = useRef(false);
   const isDirtyRef = useRef(false)
   const mainGridRef = useRef(null);
   const pendingNavigation = useRef(null);
+
   /*Global Scrolling*/
   useEffect(() => {
     const handleGlobalScroll = (event) => {
@@ -34,6 +36,18 @@ const Playing = () => {
       document.removeEventListener('wheel', handleGlobalScroll);
     };
   }, []);
+
+  /*Media Query*/
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 1000px)');
+    const handler = (e) => setIsMobile(e.matches);
+    // ✅ use modern event listeners
+    mediaQuery.addEventListener('change', handler);
+    // Initial check
+    setIsMobile(mediaQuery.matches);
+    return () => mediaQuery.removeEventListener('change', handler);
+  }, []);
+
 
   useEffect(() => {
     try {
@@ -164,7 +178,7 @@ const Playing = () => {
           <div className={styles.storyInfo}>
             <h3>{story.title}</h3>
           </div>
-          {showModal ?
+          {showModal ? 
             <div className={styles.leavingContainer}>
               <i onClick={handleCancel} className="fi fi-br-cross-small"></i>
               <div>
@@ -222,9 +236,12 @@ const Playing = () => {
 
         </div>
           : <p>oops!</p>}
-        <div className={styles.genreBannerContainer}>
+        {!isMobile ?
+         <div className={styles.genreBannerContainer}>
           <div className={styles.genreBanner}>{genreBanner()}</div>
         </div>
+          : <></>
+          }
 
       </div>
       <BottomBanner />

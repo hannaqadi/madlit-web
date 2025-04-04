@@ -24,6 +24,7 @@
   font-family: "Permanent Marker", serif;
   font-weight: 400;
   font-size: 40px;
+  text-align: center;
 }
 
 .readingContainer {
@@ -73,4 +74,49 @@
 
 .shareIcon i {
   font-size: 25px;
+}
+
+/*------------------------------------------MOBILE-------------------------------------*/
+
+
+@media (max-width: 1000px) {
+  .outerGrid {
+    grid-template-columns: 1fr 5fr 1fr;
+  }
+}
+
+
+@media (max-width: 600px) {
+
+  .mainGrid {
+    display: grid;
+    grid-template-rows: min-content auto min-content;
+  }
+
+  .title {
+    justify-self: center;
+    font-family: "Permanent Marker", serif;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+  }
+
+  .readingContainer {
+    font-family: "K2D" sans-serif;
+    font-weight: 600;
+    font-size: 16px;
+    margin: 20px;
+    align-self: center;
+  }
+
+
+  .buttonContainer button {
+    font-size: 18px;
+    height: 44px;
+  }
+
+
+  .topButtons {
+    margin-bottom: 20px;
+  }
 }

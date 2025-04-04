@@ -315,6 +315,7 @@ button {
   font-size: 20px;
   height: 43px;
   width: 75%;
+  margin-bottom: 20px;
   cursor: pointer;
 }
 
@@ -394,7 +395,7 @@ button {
     font-size: 16px;
   }
   .searchContainer {
-    width: 80%; 
+    width: 100%; 
   }
   .searchBar input {
     font-size: 16px;    
@@ -412,5 +413,12 @@ button {
   .selectedGenre {
     height: 25px;
     margin-top: 11px;
+  }
+}
+
+
+@media (max-width: 1100px) {
+  .searchContainer {
+    width: 70%; 
   }
 }

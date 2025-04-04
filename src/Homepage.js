@@ -35,9 +35,9 @@ const Homepage = () => {
     };
   }, []);
 
-
+/*Media Query*/
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const mediaQuery = window.matchMedia('(max-width: 600px)');
     const handler = (e) => setIsMobile(e.matches);
     // ✅ use modern event listeners
     mediaQuery.addEventListener('change', handler);
@@ -331,7 +331,7 @@ const Homepage = () => {
               )
             })
           ) : (
-            <p>Whoops! There's nothing here </p>
+            <p>Whoops! There's nothing here, consider refreshing? </p>
           )
           }
           {hasMore && (

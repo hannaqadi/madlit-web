@@ -46,10 +46,13 @@
 .storyInfo h3 {
   margin: 0;
   padding: 0;
+  padding-top: 20px;
+  padding-bottom: 20px;
   color: rgba(12, 24, 92, 1);
   font-family: "Permanent Marker", serif;
   font-weight: 400;
   font-size: 40px;
+  text-align: center;
 }
 
 .storyInfo p {
@@ -69,7 +72,7 @@
   border-style: none;
   border-radius: 7px;
   height: max-content;
-  width: 30%;
+  width: 696px;
   z-index: 3;
 }
 
@@ -78,8 +81,8 @@
   color: #0C185C;
   font-size: 40px;
   margin-top: 20px;
-  margin-right:20px;
-  cursor:pointer;
+  margin-right: 20px;
+  cursor: pointer;
 }
 
 .leavingContainer p {
@@ -96,26 +99,26 @@
   font-weight: 700;
 }
 
-.leavingButtons button{
+.leavingButtons button {
   align-self: center;
   font-family: "K2D", sans-serif;
   font-weight: 700;
   font-size: 24px;
-  height:64px;
+  height: 64px;
   width: 70%;
   border-style: none;
   border-radius: 7px;
   cursor: pointer;
 }
 
-.leavingButtons button:nth-child(1){
+.leavingButtons button:nth-child(1) {
   background-color: #FFA9A9;
   justify-self: end;
-  margin-right:30px;
+  margin-right: 30px;
 }
 
 
-.leavingButtons button:nth-child(2){
+.leavingButtons button:nth-child(2) {
   background-color: #75E4B3;
   justify-self: start;
   margin-left: 30px;
@@ -166,7 +169,7 @@
   width: 100%;
 }
 
-input{
+input {
   font-family: "K2D", sans-serif;
   font-weight: 400;
   font-size: 20px;
@@ -218,7 +221,7 @@ input{
   border-style: none;
   border-radius: 7px;
   height: max-content;
-  width: 17%;
+  width: 367px;
   z-index: 3;
 }
 
@@ -235,6 +238,8 @@ input{
   font-size: 24px;
   font-weight: 800;
   padding: 0px 20px;
+  margin: 0;
+  margin-top: 10px;
   margin-bottom: 0px;
 }
 
@@ -303,4 +308,83 @@ input{
   position: relative;
   top: 30px;
   margin: 0px 20px;
+}
+
+/*-----------------------------------------------------MOBILE-----------------------*/
+
+
+
+@media (max-width: 1300px) {
+  .outerGrid {
+    grid-template-columns: 1fr 5fr 1fr;
+  }
+
+  .storyInfo h3 {
+    font-size: 35px;
+  }
+}
+
+
+
+@media (max-width: 1000px) {
+  .outerGrid {
+    grid-template-columns: 1fr 15fr 1fr;
+  }
+
+  .storyInfo h3 {
+    font-size: 35px;
+  }
+
+}
+
+
+@media (max-width: 700px) {
+  .leavingContainer {
+    width: 367px;
+  }
+
+  .leavingContainer i {
+    justify-self: end;
+    color: #0C185C;
+    font-size: 25px;
+    margin-top: 20px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+
+  .leavingContainer p {
+    margin-top: 10px;
+    font-size: 20px;
+  }
+
+  .leavingButtons button {
+    font-size: 18px;
+    height: 46px;
+  }
+  
+}
+
+@media (max-width: 600px) {
+
+  .storyInfo h3 {
+    font-size: 24px;
+  }
+
+  .inputsComplete {
+    height: 47px;
+  }
+
+  .posInfo p {
+    font-size: 15px;
+  }
+
+  .finishedButtonEnabled {
+    height: 44px;
+    font-size: 18px;
+  }
+
+  .finishedButtonDisabled {
+    height: 44px;
+    font-size: 18px;
+  }
 }
